@@ -14,15 +14,16 @@ BST tree;
 // 4. load data from a file 
 
 // Additional features 
-// 1. Able to add / remove item
-// 2. Able to display items in descending order of hit count
-// 3. Algorithm optimisation
-// 4. Graphical User Interface
-// 5. User validation
+// 1. Able to add 
+// 2. Able to remove item
+// 3. Able to display items in descending order of hit count
+// 4. Algorithm optimisation
+// 5. Graphical User Interface
+// 6. User validation
 
-
-// main program 
-int main()
+// Miscellaneous features 
+// 1. to fill the tree 
+void fillTree()
 {
 	country c7("Denmark", "is a Scandinavian country in Europe.", 969.00, 9);
 	country c2("Austria", "is a federal republic and a landlocked country of over 8.7 million people in Central Europe", 870.00, 10);
@@ -104,9 +105,23 @@ int main()
 	tree.insert(c36);
 	tree.insert(c39);
 
+}
 
-	tree.remove(c9); 
+// main program 
+int main()
+{
+	fillTree();
 	tree.inorder();
+
+	string input; 
+	cout << "Enter name of country to delete : " << endl; 
+	cin >> input;
+	tree.remove(input); 
+
+
+
+
+
 	system("pause"); 
 }
 
