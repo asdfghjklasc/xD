@@ -42,6 +42,46 @@ void BST::insert(BinaryNode* &t, itemType item)
 	}
 }
 
+// search an item in the binary search tree
+BinaryNode* BST::search(itemType target)
+{
+	if (isEmpty())
+	{
+		cout << "The tree is empty. " << endl; 
+	}
+
+	else
+	{
+		return search(root, target); 
+	}
+}
+
+BinaryNode* BST::search(BinaryNode* t, itemType target)
+{
+	if (t->item.getName() == target.getName()) 
+	{
+		return t; 
+	}
+
+	else
+	{
+		if (t->item.getName() > target.getName())
+		{
+			return search(t->right, target);
+		}
+
+		else if (t->item.getName() < target.getName())
+		{
+			return search(t->left, target); 
+		}
+
+		else
+		{
+			return NULL;
+		}
+	}
+}
+
 // delete an item from the binary search tree
 void BST::remove(itemType item)
 {

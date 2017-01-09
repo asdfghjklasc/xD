@@ -18,7 +18,8 @@ public:
 	void insert(BinaryNode* &t, itemType item); 
 
 	// search an item in the binary search tree
-	// BinaryNode* search(BinaryNode* t, itemType target);
+	BinaryNode* search(itemType target);
+	BinaryNode* search(BinaryNode* t, itemType target);
 
 	// delete an item from the binary search tree
 	void remove(itemType item);
@@ -27,12 +28,9 @@ public:
 	// check if the binary search tree is empty
 	bool isEmpty();
 
-	// check if the binary search tree is balanced
-	//bool isBalanced(BinaryNode* t); 
-
+	// traverse the tree in an inorder manner 
 	void inorder(); 
 	void inorder(BinaryNode* t);
-
 };
 
 
