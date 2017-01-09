@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-using namespace std; 
+using namespace std;
 
-class tourist_attraction
+class country 
 {
 private:
 	string name;  // name of the tourist attraction 
@@ -11,8 +11,8 @@ private:
 	int hit_count;  // the hit count of the number of times people search for this particular place 
 
 public:
-	tourist_attraction();  // default constructor 
-	tourist_attraction(string name, string description, double price, int hit_count);  // parameterised constructor 
+	country();  // default constructor 
+	country(string name, string description, double price, int hit_count);  // parameterised constructor 
 
 	string getName();  // get the name of the tourist attraction 
 	void setName(string name);  // set the name of the tourist attraction 
