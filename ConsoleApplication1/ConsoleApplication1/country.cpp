@@ -3,7 +3,8 @@
 #include <string>
 using namespace std;
 
-country::country()  // default constructor 
+// default constructor 
+country::country()  
 {
 	setName("");
 	setDescription("");
@@ -11,7 +12,8 @@ country::country()  // default constructor
 	setHit_count(1);
 }
 
-country::country(string Name, string Description, double Price, int Hit_Count)  // parameterised constructor 
+// parameterised constructor
+country::country(string Name, string Description, double Price, int Hit_Count)  
 {
 	setName(Name);
 	setDescription(Description);
@@ -19,43 +21,50 @@ country::country(string Name, string Description, double Price, int Hit_Count)  
 	setHit_count(Hit_Count);
 }
 
-void country::setName(string Name)  // set the name of the tourist attraction 
+// set the name of the tourist attraction
+void country::setName(string Name)   
 {
 	name = Name;
 }
 
-
-string country::getName()  // get the name of the tourist attraction 
+// get the name of the tourist attraction
+string country::getName()  
 {
 	return name;
 }
 
-void country::setDescription(string Description)  // set the description of the tourist attraction 
+// set the description of the tourist attraction 
+void country::setDescription(string Description) 
 {
 	description = Description;
 }
 
-string country::getDescription()  // get the description of the tourist attraction 
+// get the description of the tourist attraction 
+string country::getDescription()  
 {
 	return description;
 }
 
-void country::setPrice(double Price)  // set the price 
+// set the price
+void country::setPrice(double Price)  
 {
 	price = Price;
 }
 
-double country::getPrice()  // get the price 
+// get the price 
+double country::getPrice() 
 {
 	return price;
 }
 
-void country::setHit_count(int Hit_Count)  // set the hit count
+// set the hit count
+void country::setHit_count(int Hit_Count)  
 {
 	hit_count = Hit_Count;
 }
 
-int country::getHit_count()  // get the hit count
+// get the hit count
+int country::getHit_count()  
 {
 	return hit_count;
 }
