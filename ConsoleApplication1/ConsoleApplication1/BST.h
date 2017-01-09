@@ -17,11 +17,12 @@ public:
 	void insert(itemType item); 
 	void insert(BinaryNode* &t, itemType item); 
 
-	//// search an item in the binary search tree
-	//BinaryNode* search(BinaryNode* t, itemType target);
+	// search an item in the binary search tree
+	// BinaryNode* search(BinaryNode* t, itemType target);
 
 	// delete an item from the binary search tree
-	//void remove(BinaryNode* &t, itemType item); 
+	void remove(itemType item);
+	void remove(BinaryNode* &t, ItemType item);
 
 	// check if the binary search tree is empty
 	bool isEmpty();

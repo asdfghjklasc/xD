@@ -42,6 +42,90 @@ void BST::insert(BinaryNode* &t, itemType item)
 	}
 }
 
+// delete an item from the binary search tree
+void BST::remove(itemType item)
+{
+	if (isEmpty())
+	{
+		cout << "The tree is empty. " << endl; 
+	}
+	
+	else
+	{
+		remove(root, item); 
+	}
+}
+
+void BST::remove(BinaryNode* &t, ItemType item)
+{
+	BinaryNode* temp = t;
+	BinaryNode* Parent = NULL;
+	bool right = false;
+	bool found = false;
+	while (!found && (temp != NULL))
+	{
+		if (item.getName() == (temp->item).getName())
+		{
+			found = true;
+		}
+		else
+		{
+			Parent = temp;
+			if (item.getName() > temp->item.getName())
+			{
+				temp = temp->left;
+				right = false;
+			}
+			else
+			{
+				temp = temp->right;
+				right = true;
+			}
+		}
+		if (found = true)
+		{
+			if (temp->left == NULL && temp->right == NULL)
+			{
+				if (temp = t)
+				{
+					t = NULL;
+				}
+				else if (right)
+				{
+					Parent->right = NULL;
+				}
+				else
+				{
+					Parent->left = NULL;
+				}
+			}
+			else if (temp->left)
+			{
+				if (right)
+				{
+					Parent->right = temp->right;
+				}
+				else
+				{
+					Parent->left = temp->right;
+				}
+			}
+			else
+			{
+				BinaryNode* successor = temp->left;
+				while (successor->right != NULL)
+				{
+					successor = successor->right;
+				}
+				ItemType item = successor->item;
+				remove(t, item);
+				temp->item = item;
+			}
+		}
+
+	}
+}
+
 // check if the binary search tree is empty
 bool BST::isEmpty() 
 {
