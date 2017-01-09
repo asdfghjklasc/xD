@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <fstream>
-#include "tourist_attraction.h"
+#include "country.h"
 
 // Basic Features of the application 
 // 1. search for an item 
