@@ -21,9 +21,11 @@ public:
 	BinaryNode* search(itemType target);
 	BinaryNode* search(BinaryNode* t, itemType target);
 
-	// delete an item from the binary search tree
-	void remove(itemType item);
-	void remove(BinaryNode* &t, ItemType item);
+	void remove(string item);
+
+	void remove(BinaryNode *& t, string item);
+
+
 
 	// check if the binary search tree is empty
 	bool isEmpty();

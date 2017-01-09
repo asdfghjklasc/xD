@@ -111,12 +111,11 @@ void fillTree()
 int main()
 {
 	fillTree();
-	tree.inorder();
-
 	string input; 
 	cout << "Enter name of country to delete : " << endl; 
 	cin >> input;
 	tree.remove(input); 
+	tree.inorder();
 
 
 
