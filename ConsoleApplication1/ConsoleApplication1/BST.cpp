@@ -2,7 +2,7 @@
 #include "iostream"
 using namespace std; 
 #include "BinaryNode.h"
-#include "tourist_attraction.h"
+#include "country.h"
 #include "BST.h"
 
 BST::BST()  // default constructor 

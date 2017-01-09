@@ -1,5 +1,8 @@
 #pragma once
-typedef int ItemType;
+#include <string>
+#include "country.h"
+using namespace std;
+typedef country ItemType;
 
 struct BinaryNode
 {

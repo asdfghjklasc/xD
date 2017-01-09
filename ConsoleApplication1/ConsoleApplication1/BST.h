@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include "BinaryNode.h"
-#include "tourist_attraction.h"
-typedef tourist_attraction itemType;
+#include "country.h"
+typedef country itemType;
 
 class BST
 {
