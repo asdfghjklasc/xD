@@ -43,42 +43,34 @@ void BST::insert(BinaryNode* &t, itemType item)
 }
 
 // search an item in the binary search tree
-BinaryNode* BST::search(itemType target)
+void BST::search(string item)
 {
 	if (isEmpty())
 	{
-		cout << "The tree is empty. " << endl; 
+		cout << "Item is not found. " << endl; 
 	}
 
 	else
 	{
-		return search(root, target); 
+		search(root, item); 
 	}
 }
 
-BinaryNode* BST::search(BinaryNode* t, itemType target)
+void BST::search(BinaryNode* t, string item)
 {
-	if (t->item.getName() == target.getName()) 
+	if (item == t->item.getName()) 
 	{
-		return t; 
+		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << endl; 
 	}
 
-	else
+	else if (item > t->item.getName())  // search for the target in the right sub-tree 
 	{
-		if (t->item.getName() > target.getName())
-		{
-			return search(t->right, target);
-		}
+		search(t->right, item);
+	}
 
-		else if (t->item.getName() < target.getName())
-		{
-			return search(t->left, target); 
-		}
-
-		else
-		{
-			return NULL;
-		}
+	else if (item < t->item.getName())  // search for the target in the left sub-tree 
+	{
+		search(t->left, item); 
 	}
 }
 
@@ -87,7 +79,7 @@ void BST::remove(string item)
 {
 	if (isEmpty())
 	{
-		cout << "The tree is empty. " << endl; 
+		cout << "Error: The country respository is empty. " << endl; 
 	}
 	
 	else
@@ -108,6 +100,7 @@ void BST::remove(BinaryNode* &t, string item)
 		{
 			found = true;
 		}
+
 		else
 		{
 			parent = temp;
@@ -165,7 +158,6 @@ void BST::remove(BinaryNode* &t, string item)
 	}
 }
 
-
 // check if the binary search tree is empty
 bool BST::isEmpty() 
 {
@@ -185,7 +177,7 @@ void BST::inorder()
 {
 	if (isEmpty())
 	{
-		cout << "No item found" << endl;
+		cout << "Error: The country respository is empty. " << endl;
 	}
 		
 	else

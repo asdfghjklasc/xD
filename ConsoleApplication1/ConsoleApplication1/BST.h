@@ -18,14 +18,12 @@ public:
 	void insert(BinaryNode* &t, itemType item); 
 
 	// search an item in the binary search tree
-	BinaryNode* search(itemType target);
-	BinaryNode* search(BinaryNode* t, itemType target);
+	void search(string item);
+	void search(BinaryNode* t, string item); 
 
+	// delete an item in the binary search tree 
 	void remove(string item);
-
-	void remove(BinaryNode *& t, string item);
-
-
+	void remove(BinaryNode* &t, string item);
 
 	// check if the binary search tree is empty
 	bool isEmpty();
