@@ -8,7 +8,7 @@ typedef country* itemType2;
 class BST_Hits
 {
 private: 
-	BinaryNodeHits* root; 
+	BinaryNodeHits* root;
 
 public: 
 	BST_Hits();
@@ -27,4 +27,5 @@ public:
 
 	int displayMaxHits();
 	int displayMaxHits(BinaryNodeHits*);
+	bool isempty();
 };
