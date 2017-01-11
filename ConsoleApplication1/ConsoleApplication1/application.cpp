@@ -119,7 +119,7 @@ void displayMenu()
 	cout << "=======================================================" << endl;
 	cout << "1. Search for an item" << endl;
 	cout << "2. Display the items in ascending order (of name)" << endl;
-	cout << "3. display the number of hits of an item." << endl; 
+	cout << "3. Display the number of hits of an item." << endl; 
 	cout << "4. Display the total number of countries in the world" << endl; 
 	cout << "5. Save data to a file" << endl;
 	cout << "6. Load data from a file" << endl;
