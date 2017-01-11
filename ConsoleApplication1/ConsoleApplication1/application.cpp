@@ -7,7 +7,10 @@ using namespace std;
 #include "country.h"
 #include "BST.h"
 #include "BinaryNode.h"
+#include "BST_Hits.h"
+#include "BinaryNodeHits.h"
 BST tree;
+BST_Hits hit_tree; 
 
 // Miscellaneous features 
 // 1. to print the menu of the application 
@@ -51,6 +54,7 @@ int gethits(string Name)
 // main program 
 int main()
 {
+	cout << "Please load a file containing the list of countries" << endl; 
 	int choice; 
 	displayMenu();
 	cout << "Please enter your choice : ";
@@ -120,6 +124,20 @@ int main()
 
 		else if (choice == 7)  // Able to add 
 		{
+			string name;
+			string description;
+			double price;
+			int hit_count;
+
+			cout << "Enter the name of the country : ";
+			cin >> name; 
+			cout << "Enter the description of the country : ";
+			cin >> description; 
+			cout << "Enter the price to travel to the country : ";
+			cin >> price; 
+			hit_count = 0;
+			country c1(name, description, price, hit_count);
+			tree.insert(c1);
 		}
 
 		else if (choice == 8)  // Able to remove item
@@ -132,6 +150,7 @@ int main()
 
 		else if (choice == 9)  // Able to display items in descending order of hit count
 		{
+			
 		}
 
 		cout << endl << endl << endl << endl;
