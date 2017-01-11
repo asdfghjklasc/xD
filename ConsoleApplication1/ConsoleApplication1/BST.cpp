@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "iostream"
+#include "fstream"  // stream class to both read and write from/to files.
 using namespace std; 
 #include "BinaryNode.h"
 #include "country.h"
@@ -196,4 +197,89 @@ void BST::inorder(BinaryNode* t)
 	}
 }
 
+// save data to a file
+void BST::saveData()
+{
+	if (isEmpty())
+	{
+		cout << "Error: The country respository is empty. " << endl;
+	}
 
+	else
+	{
+		string fileName;
+		cout << "Enter the file name : ";
+		cin >> fileName;
+
+		ofstream myfile; 
+		myfile.open(fileName);
+		saveData(root, myfile);
+	}
+}
+
+void BST::saveData(BinaryNode* t, ofstream& fileName)
+{
+	if (t != NULL)
+	{
+		saveData(t->left, fileName);
+		fileName << t->item.getName() << ";" << t->item.getDescription() << ";" << t->item.getPrice() << endl; 
+		saveData(t->right, fileName);
+	}
+}
+
+// count the number of countries in the world 
+int BST::countCountry()
+{
+	return countCountry(root);
+}
+
+int BST::countCountry(BinaryNode* t)
+{
+	if (t == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1 + countCountry(t->left) + countCountry(t->right);
+	}
+}
+
+// display the number of hits of an item
+ItemType BST::searchforobj(string target)
+{
+	if (isEmpty())
+	{
+		cout << "tree is empty" << endl;
+	}
+
+	else
+	{
+		return searchforobj(root, target);
+	}
+}
+
+ItemType BST::searchforobj(BinaryNode* t, string target)
+{
+	if (t == NULL)
+	{
+		cout << "item not found" << endl;
+	}
+	else
+	{
+		if ((t->item).getName() == target)
+		{
+			return t->item;
+		}
+
+		else if (target > (t->item).getName())
+		{
+			return searchforobj(t->right, target);
+		}
+
+		else
+		{
+			return searchforobj(t->left, target);
+		}
+	}
+}

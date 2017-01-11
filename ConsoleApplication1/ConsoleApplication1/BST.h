@@ -31,6 +31,19 @@ public:
 	// traverse the tree in an inorder manner 
 	void inorder(); 
 	void inorder(BinaryNode* t);
+
+	// save data to a file 
+	void saveData();
+	void saveData(BinaryNode* t, ofstream& fileName);
+
+	// count the number of countries in the world 
+	int countCountry();
+	int countCountry(BinaryNode* t);
+
+	// display the number of hits of an item
+	ItemType searchforobj(string target);
+	ItemType searchforobj(BinaryNode* t, string target);
 };
+
 
 
