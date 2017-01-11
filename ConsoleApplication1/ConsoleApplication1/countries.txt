@@ -1,0 +1,30 @@
+Denmark;is a Scandinavian country in Europe.;969.00;9
+Austria;is a federal republic and a landlocked country of over 8.7 million people in Central Europe.;870.00;10
+United Kingdom;is a sovereign country in western Europe.;700.00;7
+Bahamas;is an archipelagic state within the Lucayan Archipelago.;2114.00;5
+Canada;is a country in the northern half of North America.;838.00;2
+Iceland;is a Nordic island country in the North Atlantic Ocean.;1952.00;7
+Australia;is a country comprising the mainland of the Australian continent, the island of Tasmania and numerous smaller islands.;257.00;4
+Dominica;is a sovereign island country.;1103.00; 1
+El Salvador;is the smallest and the most densely populated country in Central America, El Salvador's capital and largest city is San Salvador.;2108.00;10
+Finland;is a sovereign state in Northern Europe.;944.00;4
+Hungary;is a unitary parliamentary republic in Central Europe.;1294.00;8
+China;is a unitary sovereign state in East Asia.;203.00;3
+Great Britain;is a large island in the north Atlantic Ocean off the northwest coast of continental Europe.; 697.00;4
+Singapore;is a sovereign city-state in Southeast Asia and the world's only island city-state.; 0.00;10
+Haiti;is a sovereign state located on the island of Hispaniola in the Greater Antilles archipelago of the Caribbean Sea.;1861.00;5
+Brazil;is the largest country in both South America and Latin America.;1472.00;10
+India;is a country in South Asia.;254.00;7
+Greece;is a country in southeastern Europe;334.00;4
+Korea South;is a sovereign state in East Asia, constituting the southern part of the Korean Peninsula.;351.00; 6
+Japan;is an island nation in East Asia.;368.00;8
+Malaysia;is a federal constitutional monarchy located in Southeast Asia.;1414.00; 3
+Russia;is a federal state in Eurasia.;680.00;10
+Taiwan;is a state in East Asia.;197.00;9
+Switzerland;is a federal republic in Europe.;1128.00;10
+United States;is a federal republic composed of 50 states, a federal district, five major self-governing territories and various possessions.;631.00;6
+Philippines;is a sovereign island in Southeast Asia situated in the western Pacific Ocean.;810.00;4
+Thailand;is a country at the centre of the Indochinese peninsula in Southeast Asia.;84.00;4
+France;is a country consisting of territory in western Europe and several overseas regions and territories.;1080.00;3
+Vietnam;is the easternmost country on the Indochina Peninsula in Southeast Asia.;197.00; 2
+Norway;is a sovereign and unitary monarchy whose territory comprises the western portion of the Scandinavian Peninsula plus the island Jan Mayen and the archipelago of Svalbard.;433.00;10

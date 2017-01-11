@@ -63,9 +63,6 @@ void BST::search(BinaryNode* t, string item)
 	{
 		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << endl; 
 		t->item.setHit_count(t->item.getHit_count() + 1);
-		country c1(t->item.getName(), t->item.getDescription(), t->item.getPrice(), t->item.getHit_count()); 
-		remove(t->item.getName());
-		insert(c1);
 	}
 
 	else if (item > t->item.getName())  // search for the target in the right sub-tree 
