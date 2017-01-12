@@ -13,7 +13,7 @@ BST tree;
 BST_Hits hit_tree; 
 
 // Miscellaneous features 
-// 1. to print the menu of the application 
+//
 // 
 // MENU 
 // Basic Features of the application 
@@ -32,6 +32,7 @@ BST_Hits hit_tree;
 // 5. Graphical User Interface
 // 6. User validation
 
+// to print the menu of the application
 void displayMenu() 
 {
 	cout << "MENU" << endl;
@@ -51,6 +52,105 @@ int gethits(string Name)
 	return(tree.searchforobj(Name)).getHit_count();
 }
 
+// option 1 of the menu 
+void option1()
+{
+	string target;
+	cout << "Enter the name of the country: ";
+	cin >> target;
+	tree.search(target);
+}
+
+// option 2 of the menu 
+void option2()
+{
+	tree.inorder();
+}
+
+// option 3 of the menu 
+void option3()
+{
+	string input;
+	cout << "Enter the name of the country : ";
+	cin >> input;
+	cout << gethits(input) << endl;
+}
+
+// option 4 of the menu 
+void option4()
+{
+	cout << tree.countCountry() << endl;
+}
+
+// option 5 of the menu 
+void option5()
+{
+	tree.saveData();
+}
+
+// option 6 of the menu 
+void option6()
+{
+	string line;
+	ifstream myfile;
+	string input;
+	cout << "Enter the file name : ";
+	cin >> input;
+	myfile.open(input);
+	while (getline(myfile, line))
+	{
+		stringstream linestream(line);
+		string name;
+		string description;
+		string price;
+		string hit_count;
+		getline(linestream, name, ';');
+		getline(linestream, description, ';');
+		getline(linestream, price, ';');
+		getline(linestream, hit_count, ';');
+		country c1(name, description, stof(price), atoi(hit_count.c_str()));
+		tree.insert(c1);
+		hit_tree.insert(&c1);
+	}
+	myfile.close();
+}
+
+// option 7 of the menu 
+void option7()
+{
+	string name;
+	string description;
+	double price;
+	int hit_count;
+
+	cout << "Enter the name of the country : ";
+	cin >> name;
+	cout << "Enter the description of the country : ";
+	cin >> description;
+	cout << "Enter the price to travel to the country : ";
+	cin >> price;
+	hit_count = 0;
+	country c1(name, description, price, hit_count);
+	tree.insert(c1);
+	hit_tree.insert(&c1);
+}
+
+// option 8 of the menu 
+void option8()
+{
+	string item;
+	cout << "Enter the name of the country : ";
+	cin >> item;
+	tree.remove(item);
+	// hit_tree.remove(&item); 
+}
+
+// option 9 of the menu 
+void option9()
+{
+	cout << hit_tree.isempty();
+}
+
 // main program 
 int main()
 {
@@ -65,95 +165,50 @@ int main()
 		// search for an item 
 		if (choice == 1)  
 		{
-			string target;
-			cout << "Enter the name of the country: ";
-			cin >> target;
-			tree.search(target);
+			option1(); 
 		}
 
 		// display the items in ascending order (of name) 
 		else if (choice == 2)  
 		{
-			tree.inorder();
+			option2();
 		}
 
 		// display the number of hits of an item.
 		else if (choice == 3)
 		{
-			string input;
-			cout << "Enter the name of the country : "; 
-			cin >> input;
-			cout << gethits(input) << endl;
+			option3();
 		}
 
 		// count the number of countries in the world 
 		else if (choice == 4)
 		{
-			cout << tree.countCountry() << endl; 
+			option4();
 		}
 
 		else if (choice == 5)  // save data to a file  
 		{
-			tree.saveData();
+			option5();
 		}
 
 		else if (choice == 6)  // load data from a file 
 		{
-			string line;
-			ifstream myfile;
-			string input;
-			cout << "Enter the file name : "; 
-			cin >> input;
-			myfile.open(input);
-			while (getline(myfile, line))
-			{
-				stringstream linestream(line);
-				string name;
-				string description;
-				string price;
-				string hit_count;
-				getline(linestream, name, ';');
-				getline(linestream, description, ';');
-				getline(linestream, price, ';');
-				getline(linestream, hit_count, ';');
-				country c1(name, description, stof(price), atoi(hit_count.c_str()));
-				tree.insert(c1);
-				hit_tree.insert(&c1); 
-			}
-			myfile.close();
+			option6();
 		}
 
 		else if (choice == 7)  // Able to add 
 		{
-			string name;
-			string description;
-			double price;
-			int hit_count;
-
-			cout << "Enter the name of the country : ";
-			cin >> name; 
-			cout << "Enter the description of the country : ";
-			cin >> description; 
-			cout << "Enter the price to travel to the country : ";
-			cin >> price; 
-			hit_count = 0;
-			country c1(name, description, price, hit_count);
-			tree.insert(c1);
-			hit_tree.insert(&c1);
+			option7();
 		}
 
 		else if (choice == 8)  // Able to remove item
 		{
-			string item;
-			cout << "Enter the name of the country : ";
-			cin >> item;
-			tree.remove(item);
-			// hit_tree.remove(&item);  
+			option8();
 		}
 
 		else if (choice == 9)  // Able to display items in descending order of hit count
 		{
-			cout << hit_tree.isempty();
+			option9();
 		}
 
 		cout << endl << endl << endl << endl;
