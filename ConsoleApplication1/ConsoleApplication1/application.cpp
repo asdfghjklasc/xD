@@ -60,7 +60,7 @@ int main()
 	cout << "Please enter your choice : ";
 	cin >> choice; 
 	
-	while (choice >= 1 && choice <= 7)
+	while (choice >= 1 && choice <= 9)
 	{
 		// search for an item 
 		if (choice == 1)  
@@ -118,6 +118,7 @@ int main()
 				getline(linestream, hit_count, ';');
 				country c1(name, description, stof(price), atoi(hit_count.c_str()));
 				tree.insert(c1);
+				hit_tree.insert(&c1); 
 			}
 			myfile.close();
 		}
@@ -138,6 +139,7 @@ int main()
 			hit_count = 0;
 			country c1(name, description, price, hit_count);
 			tree.insert(c1);
+			hit_tree.insert(&c1);
 		}
 
 		else if (choice == 8)  // Able to remove item
@@ -146,11 +148,12 @@ int main()
 			cout << "Enter the name of the country : ";
 			cin >> item;
 			tree.remove(item);
+			// hit_tree.remove(&item);  
 		}
 
 		else if (choice == 9)  // Able to display items in descending order of hit count
 		{
-			
+			cout << hit_tree.isempty();
 		}
 
 		cout << endl << endl << endl << endl;

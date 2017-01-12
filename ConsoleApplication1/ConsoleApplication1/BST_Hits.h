@@ -18,13 +18,13 @@ public:
 	void insert(itemType2 item);
 	void insert(BinaryNodeHits* t, itemType2 item);
 
-	// search an item in the binary search tree
+	/*// search an item in the binary search tree
 	BinaryNodeHits* search(itemType2 target);
 	BinaryNodeHits* search(BinaryNodeHits* t, itemType2 target);
 
 	// delete an item in the binary search tree
 	void remove(itemType2 target);
-	void remove(BinaryNodeHits* t, itemType2 target);
+	void remove(BinaryNodeHits* t, itemType2 target);*/
 
 	// print the country inorder based on the no. of hits 
 	void printinorderofhits();
