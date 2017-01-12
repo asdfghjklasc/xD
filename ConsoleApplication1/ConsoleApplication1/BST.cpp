@@ -20,7 +20,7 @@ void BST::insert(itemType item)
 
 void BST::insert(BinaryNode* &t, itemType item)
 {
-	if (t == NULL)
+	if (t == NULL)  // check if the tree is empty
 	{
 		BinaryNode* newNode = new BinaryNode;
 		newNode->item = item;

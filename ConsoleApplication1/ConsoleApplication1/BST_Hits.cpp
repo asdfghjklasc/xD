@@ -16,41 +16,37 @@ BST_Hits::BST_Hits()
 // add an item to the binary search tree
 void BST_Hits::insert(itemType2 item)
 {
-	return insert(root, item);
+	insert(root, item);
 }
 
-void BST_Hits::insert(BinaryNodeHits* t, itemType2 item)
+void BST_Hits::insert(BinaryNodeHits* &t, itemType2 memAddr)
 {
-	if (root == NULL)  // if the tree is empty 
+	if (t == NULL)  // if the tree is empty 
 	{
 		BinaryNodeHits* newNode = new BinaryNodeHits; 
-		newNode->item = item;
+		newNode->item = memAddr;
 		newNode->left = NULL;
 		newNode->right = NULL; 
 		t = newNode; 
 	}
-
+	
 	else
 	{
-		if ((*(t->item)).getHit_count() > (*item).getHit_count())  // insert in the right sub-tree 
+		if ((*(t->item)).getHit_count() > (*memAddr).getHit_count())  // insert in the right sub-tree 
 		{
-			insert(t->right, item);
+			insert(t->right, memAddr);
 		}
 
 		else  // insert in the left sub-tree 
 		{
-			insert(t->left, item);
+			insert(t->left, memAddr);
 		}
 	}
 }
 
-/*// search an item in the binary search tree
-BinaryNodeHits* search(itemType2 target) {};
-BinaryNodeHits* search(BinaryNodeHits* t, itemType2 target) {};
-
 // delete an item in the binary search tree
 void remove(itemType2 target) {};
-void remove(BinaryNodeHits* t, itemType2 target) {};*/
+void remove(BinaryNodeHits* t, itemType2 target) {};
 
 // print the country inorder based on the no. of hits 
 void BST_Hits::printinorderofhits()

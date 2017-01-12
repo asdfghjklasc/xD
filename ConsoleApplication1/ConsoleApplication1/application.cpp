@@ -148,7 +148,7 @@ void option8()
 // option 9 of the menu 
 void option9()
 {
-	cout << hit_tree.isempty();
+	hit_tree.printinorderofhits();
 }
 
 // main program 
