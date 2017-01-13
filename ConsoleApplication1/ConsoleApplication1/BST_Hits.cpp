@@ -16,30 +16,30 @@ BST_Hits::BST_Hits()
 // add an item to the binary search tree
 void BST_Hits::insert(itemType2 item)
 {
-	insert(root, item);
+	return insert(root, item);
 }
 
-void BST_Hits::insert(BinaryNodeHits* &t, itemType2 memAddr)
+void BST_Hits::insert(BinaryNodeHits* &t, itemType2 item)
 {
-	if (t == NULL)  // if the tree is empty 
+	if (t == NULL)
 	{
-		BinaryNodeHits* newNode = new BinaryNodeHits; 
-		newNode->item = memAddr;
-		newNode->left = NULL;
-		newNode->right = NULL; 
-		t = newNode; 
+		BinaryNodeHits *NewNode = new BinaryNodeHits;
+		NewNode->item = item;
+		NewNode->right = NULL;
+		NewNode->left = NULL;
+		t = NewNode;
 	}
-	
+
 	else
 	{
-		if ((*(t->item)).getHit_count() > (*memAddr).getHit_count())  // insert in the right sub-tree 
+		if ((*(t->item)).getHit_count() > (*(item)).getHit_count())
 		{
-			insert(t->right, memAddr);
+			insert(t->right, item);
 		}
 
-		else  // insert in the left sub-tree 
+		else
 		{
-			insert(t->left, memAddr);
+			insert(t->left, item);
 		}
 	}
 }
@@ -53,7 +53,7 @@ void BST_Hits::printinorderofhits()
 {
 	if (isempty())
 	{
-		cout << "tree is empty" << endl;
+		cout << "Error: The country respository is empty" << endl;
 	}
 	else
 	{
@@ -63,9 +63,12 @@ void BST_Hits::printinorderofhits()
 
 void BST_Hits::printinorderofhits(BinaryNodeHits* t)
 {
-	printinorderofhits(t->right);
-	cout << (*(t->item)).getHit_count() << endl;
-	printinorderofhits(t->left);
+	if (t != NULL)
+	{
+		printinorderofhits((t->left));
+		cout << (*(t->item)).getName() << (*(t->item)).getDescription() << (*(t->item)).getHit_count() << endl; 
+		printinorderofhits((t->right));
+	}
 }
 
 // display the country with the max no. of hits 
@@ -74,9 +77,13 @@ int BST_Hits::displayMaxHits()
 	return displayMaxHits(root);
 }
 
-int BST_Hits::displayMaxHits(BinaryNodeHits* t)
+int BST_Hits::displayMaxHits(BinaryNodeHits* &t)
 {
-	if (t->right == NULL)
+	if (t->right != NULL)
+	{
+		t = t->right;
+	}
+	else
 	{
 		return (*(t->item)).getHit_count();
 	}

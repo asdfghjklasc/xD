@@ -16,9 +16,13 @@ public:
 
 	// add an item to the binary search tree
 	void insert(itemType2 item);
-	void insert(BinaryNodeHits* &t, itemType2 memAddr);
+	void insert(BinaryNodeHits* &t, itemType2 item);
 
-	/*// delete an item in the binary search tree
+	/*// search an item in the binary search tree
+	BinaryNodeHits* search(itemType2 target);
+	BinaryNodeHits* search(BinaryNodeHits* t, itemType2 target);
+
+	// delete an item in the binary search tree
 	void remove(itemType2 target);
 	void remove(BinaryNodeHits* t, itemType2 target);*/
 
@@ -28,7 +32,7 @@ public:
 
 	// display the country with the max no. of hits 
 	int displayMaxHits();
-	int displayMaxHits(BinaryNodeHits*);
+	int displayMaxHits(BinaryNodeHits* &t);
 
 	// check if the binary search tree is empty
 	bool isempty();
