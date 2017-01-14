@@ -41,8 +41,8 @@ public:
 	int countCountry(BinaryNode* t);
 
 	// display the number of hits of an item
-	ItemType searchforobj(string target);
-	ItemType searchforobj(BinaryNode* t, string target);
+	void searchforHit(string target);
+	void searchforHit(BinaryNode* t, string target);
 };
 
 

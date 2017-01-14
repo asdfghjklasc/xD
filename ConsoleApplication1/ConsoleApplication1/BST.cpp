@@ -46,22 +46,14 @@ void BST::insert(BinaryNode* &t, itemType item)
 // search an item in the binary search tree
 void BST::search(string item)
 {
-	if (isEmpty())
-	{
-		cout << "Item is not found. " << endl; 
-	}
-
-	else
-	{
-		search(root, item); 
-	}
+	search(root, item); 
 }
 
 void BST::search(BinaryNode* t, string item)
 {
 	if (item == t->item.getName()) 
 	{
-		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << endl; 
+		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << "." << endl; 
 		t->item.setHit_count(t->item.getHit_count() + 1);
 	}
 
@@ -79,15 +71,7 @@ void BST::search(BinaryNode* t, string item)
 // delete an item from the binary search tree
 void BST::remove(string item)
 {
-	if (isEmpty())
-	{
-		cout << "Error: The country respository is empty. " << endl; 
-	}
-	
-	else
-	{
-		remove(root, item); 
-	}
+	remove(root, item);
 }
 
 void BST::remove(BinaryNode* &t, string item)
@@ -179,7 +163,7 @@ void BST::inorder()
 {
 	if (isEmpty())
 	{
-		cout << "Error: The country respository is empty. " << endl;
+		cout << "Error : The country respository is empty. " << endl;
 	}
 		
 	else
@@ -212,7 +196,7 @@ void BST::saveData()
 		cout << "Enter the file name : ";
 		cin >> fileName;
 
-		ofstream myfile; 
+		ofstream myfile;
 		myfile.open(fileName);
 		saveData(root, myfile);
 	}
@@ -247,40 +231,32 @@ int BST::countCountry(BinaryNode* t)
 }
 
 // display the number of hits of an item
-ItemType BST::searchforobj(string target)
+void BST::searchforHit(string target)
 {
-	if (isEmpty())
-	{
-		cout << "tree is empty" << endl;
-	}
-
-	else
-	{
-		return searchforobj(root, target);
-	}
+	return searchforHit(root, target);
 }
 
-ItemType BST::searchforobj(BinaryNode* t, string target)
+void BST::searchforHit(BinaryNode* t, string target)
 {
 	if (t == NULL)
 	{
-		cout << "item not found" << endl;
+		cout << "Error : Country not found." << endl;
 	}
 	else
 	{
 		if ((t->item).getName() == target)
 		{
-			return t->item;
+			cout << "The number of search hits is " << t->item.getHit_count() << ".";
 		}
 
 		else if (target > (t->item).getName())
 		{
-			return searchforobj(t->right, target);
+			searchforHit(t->right, target);
 		}
 
 		else
 		{
-			return searchforobj(t->left, target);
+			searchforHit(t->left, target);
 		}
 	}
 }
