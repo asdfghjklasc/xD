@@ -232,6 +232,7 @@ void choice9()
 
 		country country(name, description, stof(price), hit_count);
 		tree.insert(country);
+		hashtable.addItem(country);
 	}
 
 	catch (...)
@@ -267,7 +268,7 @@ void choice10()
 			}
 
 			tree.remove(item);
-			// hit_tree.remove(&item);
+			hashtable.removeItem(item); 
 		}
 
 		catch (...)

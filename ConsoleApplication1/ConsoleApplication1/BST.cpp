@@ -107,7 +107,7 @@ void BST::remove(BinaryNode* &t, string item)
 	{
 		if (temp->left == NULL && temp->right == NULL)
 		{
-			if (temp == t)	
+			if (temp == t)
 				t = NULL;
 			else
 				if (Left)

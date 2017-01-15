@@ -70,24 +70,54 @@ void HashTable::addItem(itemType2 item)
 void HashTable::removeItem(string item)
 {
 	int index = hash(item);  // to obtain the bucket where the item is stored in the hash table 
-	hItem* temp = table[index];  // the pointer that points to the bucket 
 
-	// case 1: The bucket is empty 
-	if (temp->name == item)
+	// the bucket is empty 
+	if (table[index]->name == "empty")
 	{
-
+		cout << "Error : No such country exist. " << endl;
 	}
-	
+
 	// Bucket only contains one item and it matches the item to be deleted 
+	else if (table[index]->name == item && table[index]->next == NULL)
+	{
+		table[index]->name = "empty";
+		table[index]->description = "empty";
+		table[index]->price = 0;
+		table[index]->hit_count = 0;
+	}
 
 	// Bucket contains more than one item and the item to be deleted matches the first item in the bucket 
+	else if (table[index]->name == item && table[index]->next != NULL)
+	{
+		hItem* temp = table[index];  // the pointer that points to the bucket item (used as a delete pointer) 
+		table[index] = table[index]->next;
+		delete temp;
+	}
 
 	// Bucket contains more than one item but the first item is not a match 
+	else
+	{
+		hItem* p1 = table[index]->next;
+		hItem* p2 = table[index];
 
-	// No match 
+		// no match
+		if (p1 == NULL)
+		{
+			cout << "Error." << endl; 
+		}
+
+		// match 
+		else
+		{
+			hItem* delPtr = p1;
+			p1 = p1->next;
+			p2->next = p1;
+			delete delPtr;
+		}
+	}
 }
 
-// count the number of items in a hash bucket/index
+// count the number of items in a hash bucket/index (FOR TESTING PURPOSES IGNORE) 
 int HashTable::numberOfItemsInIndex(int index) 
 {
 	int count = 0;
@@ -109,6 +139,7 @@ int HashTable::numberOfItemsInIndex(int index)
 	return count; 
 }
 
+// for testing purposes (IGNORE) 
 void HashTable::printTable()
 {
 	int number;
@@ -124,17 +155,18 @@ void HashTable::printTable()
 	}
 }
 
+// for testing purposes (IGNORE) 
 void HashTable::printItemsInIndex(int index)
 {
 	hItem* ptr = table[index]; 
 	if (ptr->name == "empty")
 	{
-		cout << "index = " << index << "is empty";
+		cout << "index = " << " " << index << "is empty" << endl; 
 	}
 
 	else
 	{
-		cout << "index" << index << "contains the following items" << endl;
+		cout << "index = " << " " << index << " " << "contains the following items" << endl;
 		while (ptr != NULL)
 		{
 			cout << "------------" << endl;
@@ -193,14 +225,6 @@ void HashTable::sortAndPrintByName(int arraySize)
 	}
 }
 
-// check if the hash table is empty 
-bool HashTable::isEmpty()
-{
-	for (int i = 0; i < tableSize; i++)
-	{
-		bool check = true; 
-	}
-}
 
 
 	
