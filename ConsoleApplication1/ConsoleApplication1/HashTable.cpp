@@ -1,11 +1,14 @@
 #include "stdafx.h"
 #include "iostream"
+#include "algorithm"
 #include <string>
 #include "HashTable.h"
+#include "BST.h" 
 #include "country.h"
 using namespace std; 
 
-HashTable::HashTable()  // intialise the hash table array
+// intialise the hash table array
+HashTable::HashTable()  
 {
 	for (int i = 0; i < tableSize; i++)  // to run through every index in the hash table 
 	{
@@ -18,7 +21,8 @@ HashTable::HashTable()  // intialise the hash table array
 	}
 }
 
-int HashTable::hash(string key)  // hash algorithm 
+// hash algorithm 
+int HashTable::hash(string key)  
 {
 	int hash = 0;
 	int index;
@@ -32,7 +36,8 @@ int HashTable::hash(string key)  // hash algorithm
 	return index; 
 }
 
-void HashTable::addItem(itemType2 item)  // insert an item into the hash table 
+// insert an item into the hash table 
+void HashTable::addItem(itemType2 item)  
 {
 	int index = hash(item.getName());  // hold the location in the hash table to store this info
 	if (table[index]->name == "empty")  // if the hash table bucket/index is empty 
@@ -61,7 +66,29 @@ void HashTable::addItem(itemType2 item)  // insert an item into the hash table
 	}
 }
 
-int HashTable::numberOfItemsInIndex(int index)  // count the number of items in a hash bucket/index
+// remove an item from the hash table 
+void HashTable::removeItem(string item)
+{
+	int index = hash(item);  // to obtain the bucket where the item is stored in the hash table 
+	hItem* temp = table[index];  // the pointer that points to the bucket 
+
+	// case 1: The bucket is empty 
+	if (temp->name == item)
+	{
+
+	}
+	
+	// Bucket only contains one item and it matches the item to be deleted 
+
+	// Bucket contains more than one item and the item to be deleted matches the first item in the bucket 
+
+	// Bucket contains more than one item but the first item is not a match 
+
+	// No match 
+}
+
+// count the number of items in a hash bucket/index
+int HashTable::numberOfItemsInIndex(int index) 
 {
 	int count = 0;
 	if (table[index]->name == "empty")
@@ -119,33 +146,63 @@ void HashTable::printItemsInIndex(int index)
 	}
 }
 
-void HashTable::sortAndPrintByName()
-{
-	string countryArray[30] = {};  // array to store the names of the countries 
+// display the items in ascending order (of name)
+void HashTable::sortAndPrintByName(int arraySize)
+{ 
+	string* countryArray; 
+	countryArray = new string[arraySize];  // dynamic array to store the names of the countries 
 	int a = 0;  // counter for the array 
 
-	for (int i = 0; i < tableSize; i++)
+	for (int i = 0; i < tableSize; i++)  // obtaining the values from the hash table and storing them in a dynamic array 
 	{
-		countryArray[a] = table[i]->name; 
-		a++; 
+		if (table[i]->name != "empty")
+		{
+			countryArray[a] = table[i]->name;
+			a++;
+			if (table[i]->next != NULL)
+			{
+				hItem* ptr = table[i]; 
+				ptr = ptr->next; 
+				while (ptr != NULL)
+				{
+					countryArray[a] = ptr->name;
+					a++;
+					ptr = ptr->next; 
+				}
+			}
+		}
 	}
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < arraySize; i++)  // sorting algorithm 
+	{
+		for (int f = 0; f < arraySize; f++)
+		{
+			if (countryArray[i] < countryArray[f])
+			{
+				string swap = countryArray[i];
+				string swap2 = countryArray[f];
+				countryArray[i] = swap2; 
+				countryArray[f] = swap;
+			}
+		}
+	}
+
+	for (int i = 0; i < arraySize; i++)  // printing the contents of the array 
 	{
 		cout << countryArray[i] << endl; 
 	}
 }
 
+// check if the hash table is empty 
+bool HashTable::isEmpty()
+{
+	for (int i = 0; i < tableSize; i++)
+	{
+		bool check = true; 
+	}
+}
+
 
 	
-			//countryArray[a] = table[index]->name;
-			//a++;
-		
-
-
-	/*for (int i = 0; i <= 30; i++)
-	{ 
-		cout << countryArray[i] << endl; 
-	}*/
 
 

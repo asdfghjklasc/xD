@@ -36,22 +36,20 @@ void displayMenu()
 {
 	cout << "MENU" << endl;
 	cout << "=======================================================" << endl;
-	cout << "1. Search for an item" << endl;
-	cout << "2. Display the items in ascending order (of name)" << endl;
-	cout << "3. Display the number of hits of an item." << endl; 
-	cout << "4. Display the total number of countries in the world" << endl; 
-	cout << "5. Save data to a file" << endl;
-	cout << "6. Load data from a file" << endl;
-	cout << "7. Add an item" << endl;
-	cout << "8. Remove an item" << endl;
-	cout << "9. Display items in descending order of hit count" << endl << endl;
+	cout << " 1. Search for an item" << endl;
+	cout << " 2. Display the items in ascending order (of name)" << endl;
+	cout << " 3. Display items in descending order of hit count" << endl;
+	cout << " 4. Display the number of hits of an country." << endl; 
+	cout << " 5. Display the most searched country." << endl;  // incomplete
+	cout << " 6. Display the total number of countries in the world" << endl; 
+	cout << " 7. Save data to a file" << endl;
+	cout << " 8. Load data from a file" << endl;
+	cout << " 9. Add a new country" << endl;
+	cout << "10. Remove an existing country" << endl;
 }
-/*int gethits(string Name)
-{
-	return(tree.searchforobj(Name)).getHit_count();
-}*/
-
-void choice1()  // search for an item
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// search for an item
+void choice1()  
 {
 	try
 	{
@@ -70,7 +68,7 @@ void choice1()  // search for an item
 			for (int i = 0; i < target.length(); i++)  
 			{
 				c = target.at(i);
-				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z'))
+				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
 				{
 					throw 0;
 				}
@@ -82,21 +80,37 @@ void choice1()  // search for an item
 
 	catch(...)
 	{
-		cout << "invalid input" << endl;
+		cout << "Invalid input" << endl;
 	}
 }
 	
-
-void choice2()  // display the items in ascending order (of name)
-{
-	tree.inorder();
-}
-
-void choice3()  // display the number of hits of a country 
+// display the items in ascending order (of name)
+void choice2()  
 {
 	if (tree.isEmpty())
 	{
-		cout << "Error : The country respository is empty." << endl; 
+		cout << "Error : The country respository is empty." << endl;
+	}
+
+	else
+	{
+		int arraySize = tree.countCountry();
+		hashtable.sortAndPrintByName(arraySize);
+	}
+}
+
+// display items in descending order of hit count
+void choice3()  
+{
+	tree.inorder(); 
+}
+
+// display the number of hits of an country
+void choice4() 
+{
+	if (tree.isEmpty())
+	{
+		cout << "Error : The country respository is empty." << endl;
 	}
 
 	else
@@ -110,22 +124,29 @@ void choice3()  // display the number of hits of a country
 			for (int i = 0; i < input.length(); i++)
 			{
 				c = input.at(i);
-				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z'))
+				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
 				{
 					throw 0;
 				}
 			}
 			tree.searchforHit(input);
 		}
-		
+
 		catch (...)
 		{
-			cout << "Error : Invalid input entered." << endl; 
+			cout << "Error : Invalid input entered." << endl;
 		}
 	}
 }
 
-void choice4()  // display the total number of countries in the world
+// display the most searched country
+void choice5()  
+{
+	//tree.searchforHit(); 
+}
+
+// display the total number of countries in the world
+void choice6()  
 {
 	if (tree.isEmpty())
 	{
@@ -138,13 +159,15 @@ void choice4()  // display the total number of countries in the world
 	}
 }
 
-void choice5()  // save data to a file
+// save data to a file
+void choice7() 
 {
-	int option; 
+	int option;
 	tree.saveData();
 }
 
-void choice6()  // load data to a file
+// load data from a file
+void choice8()  
 {
 	string line;
 	ifstream myfile;
@@ -170,7 +193,8 @@ void choice6()  // load data to a file
 	myfile.close();
 }
 
-void choice7()  // add an item
+// add a new country
+void choice9()  
 {
 	try
 	{
@@ -205,18 +229,19 @@ void choice7()  // add an item
 				throw 0;
 			}
 		}
-	
+
 		country country(name, description, stof(price), hit_count);
 		tree.insert(country);
 	}
-	
+
 	catch (...)
 	{
-		cout << "Error : Invalid input entered." << endl; 
+		cout << "Error : Invalid input entered." << endl;
 	}
 }
 
-void choice8()  // remove an item
+// remove an existing country
+void choice10()  
 {
 	if (tree.isEmpty())
 	{
@@ -235,7 +260,7 @@ void choice8()  // remove an item
 			for (int i = 0; i < item.length(); i++)
 			{
 				c = item.at(i);
-				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z'))
+				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
 				{
 					throw 0;
 				}
@@ -252,74 +277,78 @@ void choice8()  // remove an item
 	}
 }
 
-void choice9()  // display items in descending order of hit count
-{
-	// hashtable.printTable(); 
-	//hashtable.printItemsInIndex(66);
-	hashtable.sortAndPrintByName();
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // main program 
 int main()
 {
 	try 
 	{
-		cout << "Please load a file containing the list of countries" << endl;
+		cout << "**Please load a file containing the list of countries**" << endl;
 		int choice;
 		displayMenu();
 		cout << "Please enter your choice : ";
 		cin >> choice;
 
-		while (choice >= 1 && choice <= 9)
+		while (choice >= 1 && choice <= 10)
 		{
-			// search for an item 
+			// search for an item
 			if (choice == 1)
 			{
 				choice1();
 			}
 
-			// display the items in ascending order (of name) 
+		    // display the items in ascending order (of name)
 			else if (choice == 2)
 			{
 				choice2();
 			}
 
-			// display the number of hits of an item.
+			// display items in descending order of hit count
 			else if (choice == 3)
 			{
 				choice3();
 			}
 
-			// count the number of countries in the world 
+			// display the number of hits of an country
 			else if (choice == 4)
 			{
 				choice4();
 			}
 
-			else if (choice == 5)  // save data to a file  
+			// display the most searched country
+			else if (choice == 5)  
 			{
 				choice5();
 			}
 
-			else if (choice == 6)  // load data from a file 
+			// display the total number of countries in the world
+			else if (choice == 6)  
 			{
 				choice6();
 			}
 
-			else if (choice == 7)  // Able to add 
+			// save data to a file
+			else if (choice == 7)  
 			{
 				choice7();
 			}
 
-			else if (choice == 8)  // Able to remove item
+			// load data from a file"
+			else if (choice == 8)  
 			{
 				choice8();
 			}
 
-			else if (choice == 9)  // Able to display items in descending order of hit count
+			// add a new country
+			else if (choice == 9)  
 			{
 				choice9();
+			}
+
+			// remove an existing country
+			else if (choice == 10)
+			{
+				choice10(); 
 			}
 
 			cout << endl << endl << endl << endl;

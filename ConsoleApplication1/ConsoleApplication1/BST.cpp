@@ -31,14 +31,14 @@ void BST::insert(BinaryNode* &t, itemType item)
 
 	else
 	{
-		if (item.getName() > t->item.getName())  // insert in the right sub-tree 
-		{
-			insert(t->right, item);
-		}
-
-		else                                     // insert in the left sub-tree 
+		if (item.getHit_count() > t->item.getHit_count())  // insert in the right sub-tree 
 		{
 			insert(t->left, item);
+		}
+
+		else  // insert in the left sub-tree 
+		{
+			insert(t->right, item);
 		}
 	}
 }

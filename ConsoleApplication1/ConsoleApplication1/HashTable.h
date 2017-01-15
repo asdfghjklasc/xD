@@ -7,7 +7,7 @@ typedef country itemType2;
 class HashTable
 {
 private:
-	static const int tableSize = 10;  // determine the size of the hash table 
+	static const int tableSize = 103;  // determine the size of the hash table 
 
 	struct hItem  // what items consist of that will be stored in the hash table 
 	{
@@ -26,10 +26,12 @@ public:
 	HashTable();  // default constructor 
 	int hash(string key);  // hash algorithm 
 	void addItem(itemType2 item);  // insert an item into the hash table 
+	void removeItem(string item);   // delete an item from the hash table 
 	int numberOfItemsInIndex(int index);  // count the number of items in a hash bucket/index 
 	void printTable();
 	void printItemsInIndex(int index);
-	void sortAndPrintByName(); 
+	void sortAndPrintByName(int arraySize);  
+	bool isEmpty();
 };
 #endif
 
