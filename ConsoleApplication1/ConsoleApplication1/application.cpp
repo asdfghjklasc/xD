@@ -8,6 +8,9 @@ using namespace std;
 #include "BST.h"
 #include "BinaryNode.h"
 #include "HashTable.h" 
+#include "libxl.h"
+using namespace libxl;
+#include <conio.h>
 
 BST tree;
 HashTable hashtable; 
@@ -46,6 +49,7 @@ void displayMenu()
 	cout << " 8. Load data from a file" << endl;
 	cout << " 9. Add a new country" << endl;
 	cout << "10. Remove an existing country" << endl;
+	cout << " 11. Load data from an Excel file" << endl;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // search for an item
@@ -278,6 +282,41 @@ void choice10()
 	}
 }
 
+//load data from excel file
+void choice11()
+{
+	Book* book = xlCreateBook();
+	if (book)
+	{
+		int row = 0;
+		string name;
+		string description;
+		double price;
+		int hit_count;
+		if (book->load(L"example.xls"))
+		{
+			Sheet* sheet = book->getSheet(0);
+			while (price != NULL)
+			{
+				if (sheet)
+				{
+					//read string value
+					name = sheet->readStr(row, 0);
+					description = sheet->readStr(row + 1, 0);
+
+					//read numeric value
+					price = sheet->readNum(row + 2, 0);
+					hit_count = sheet->readNum(row + 3, 0);
+
+					country country(name, description, price, hit_count);
+					tree.insert(country);
+					row = row + 1;
+				}
+			}
+		}
+	}
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // main program 
 int main()
@@ -350,6 +389,12 @@ int main()
 			else if (choice == 10)
 			{
 				choice10(); 
+			}
+
+			// load data from excel (.xls)
+			else if (choice == 11)
+			{
+				choice11();
 			}
 
 			cout << endl << endl << endl << endl;
