@@ -171,32 +171,78 @@ void choice7()
 }
 
 // load data from a file
-void choice8()  
+void choice8()
 {
-	string line;
-	ifstream myfile;
-	string input;
-	cout << "Enter the file name : ";
-	cin >> input;
-	myfile.open(input);
-	cout << "Progress...." << endl; 
-	while (getline(myfile, line))
+	int choice;
+	cout << "1. Load .txt file" << endl;
+	cout << "2. Load .xls file" << endl;
+	cout << "Please enter your choice : ";
+	cin >> choice;
+
+	while (choice >= 1 && choice <= 2)
 	{
-		stringstream linestream(line);
-		string name;
-		string description;
-		string price;
-		string hit_count;
-		getline(linestream, name, ';');
-		getline(linestream, description, ';');
-		getline(linestream, price, ';');
-		getline(linestream, hit_count, ';');
-		country country(name, description, stof(price), atoi(hit_count.c_str()));
-		tree.insert(country);
-		hashtable.addItem(country);
-		cout << "Item successfully loaded." << endl;
+		// load data from .txt
+		if (choice == 1)
+		{
+			string line;
+			ifstream myfile;
+			string input;
+			cout << "Enter the file name : ";
+			cin >> input;
+			myfile.open(input);
+			while (getline(myfile, line))
+			{
+				stringstream linestream(line);
+				string name;
+				string description;
+				string price;
+				string hit_count;
+				getline(linestream, name, ';');
+				getline(linestream, description, ';');
+				getline(linestream, price, ';');
+				getline(linestream, hit_count, ';');
+				country country(name, description, stof(price), atoi(hit_count.c_str()));
+				tree.insert(country);
+				hashtable.addItem(country);
+			}
+			myfile.close();
+		}
+
+		// load data from .xls
+		else if (choice == 2)
+		{
+			Book* book = xlCreateBook();
+			if (book)
+			{
+				int row = 0;
+				string name;
+				string description;
+				double price;
+				int hit_count;
+				if (book->load(L"example.xls"))
+				{
+					Sheet* sheet = book->getSheet(0);
+					while (price != NULL)
+					{
+						if (sheet)
+						{
+							//read string value
+							name = sheet->readStr(row, 0);
+							description = sheet->readStr(row + 1, 0);
+
+							//read numeric value
+							price = sheet->readNum(row + 2, 0);
+							hit_count = sheet->readNum(row + 3, 0);
+
+							country country(name, description, price, hit_count);
+							tree.insert(country);
+							row = row + 1;
+						}
+					}
+				}
+			}
+		}
 	}
-	myfile.close();
 }
 
 // add a new country
@@ -283,41 +329,6 @@ void choice10()
 		}
 	}
 }
-
-/*//load data from excel file
-void choice11()
-{
-	Book* book = xlCreateBook();
-	if (book)
-	{
-		int row = 0;
-		string name;
-		string description;
-		double price;
-		int hit_count;
-		if (book->load(L"example.xls"))
-		{
-			Sheet* sheet = book->getSheet(0);
-			while (price != NULL)
-			{
-				if (sheet)
-				{
-					//read string value
-					name = sheet->readStr(row, 0);
-					description = sheet->readStr(row + 1, 0);
-
-					//read numeric value
-					price = sheet->readNum(row + 2, 0);
-					hit_count = sheet->readNum(row + 3, 0);
-
-					country country(name, description, price, hit_count);
-					tree.insert(country);
-					row = row + 1;
-				}
-			}
-		}
-	}
-}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // main program 
