@@ -7,7 +7,7 @@ typedef country itemType2;
 class HashTable
 {
 private:
-	static const int tableSize = 11;  // determine the size of the hash table 
+	static const int tableSize = 101;  // determine the size of the hash table 
 
 	struct hItem  // what items consist of that will be stored in the hash table 
 	{

@@ -49,7 +49,7 @@ void displayMenu()
 	cout << " 8. Load data from a file" << endl;
 	cout << " 9. Add a new country" << endl;
 	cout << "10. Remove an existing country" << endl;
-	cout << " 11. Load data from an Excel file" << endl;
+	cout << "11. Load data from an Excel file" << endl;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // search for an item
@@ -146,7 +146,7 @@ void choice4()
 // display the most searched country
 void choice5()  
 {
-	//tree.searchforHit(); 
+	tree.searchforobj(); 
 }
 
 // display the total number of countries in the world
@@ -179,6 +179,7 @@ void choice8()
 	cout << "Enter the file name : ";
 	cin >> input;
 	myfile.open(input);
+	cout << "Progress...." << endl; 
 	while (getline(myfile, line))
 	{
 		stringstream linestream(line);
@@ -193,6 +194,7 @@ void choice8()
 		country country(name, description, stof(price), atoi(hit_count.c_str()));
 		tree.insert(country);
 		hashtable.addItem(country);
+		cout << "Item successfully loaded." << endl;
 	}
 	myfile.close();
 }
@@ -282,7 +284,7 @@ void choice10()
 	}
 }
 
-//load data from excel file
+/*//load data from excel file
 void choice11()
 {
 	Book* book = xlCreateBook();
@@ -315,7 +317,7 @@ void choice11()
 			}
 		}
 	}
-}
+}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // main program 
@@ -391,11 +393,11 @@ int main()
 				choice10(); 
 			}
 
-			// load data from excel (.xls)
+			/*// load data from excel (.xls)
 			else if (choice == 11)
 			{
 				choice11();
-			}
+			}*/
 
 			cout << endl << endl << endl << endl;
 			displayMenu();

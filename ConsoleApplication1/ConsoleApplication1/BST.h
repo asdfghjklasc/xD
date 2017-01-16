@@ -43,6 +43,10 @@ public:
 	// display the number of hits of an item
 	void searchforHit(string target);
 	void searchforHit(BinaryNode* t, string target);
+
+	// display the most searched country/countries 
+	void searchforobj();
+	void searchforobj(BinaryNode* t);
 };
 
 

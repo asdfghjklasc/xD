@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "iostream"
 #include "fstream"  // stream class to both read and write from/to files.
+#include <iomanip>
 using namespace std; 
 #include "BinaryNode.h"
 #include "country.h"
@@ -31,12 +32,12 @@ void BST::insert(BinaryNode* &t, itemType item)
 
 	else
 	{
-		if (item.getHit_count() > t->item.getHit_count())  // insert in the right sub-tree 
+		if (item.getHit_count() > t->item.getHit_count())  // insert in the left sub-tree 
 		{
 			insert(t->left, item);
 		}
 
-		else  // insert in the left sub-tree 
+		else  // insert in the right sub-tree 
 		{
 			insert(t->right, item);
 		}
@@ -71,7 +72,15 @@ void BST::search(BinaryNode* t, string item)
 // delete an item from the binary search tree
 void BST::remove(string item)
 {
-	remove(root, item);
+	if (isEmpty())
+	{
+		cout << "Error: The country respository is empty. " << endl;
+	}
+
+	else
+	{
+		remove(root, item);
+	}
 }
 
 void BST::remove(BinaryNode* &t, string item)
@@ -92,12 +101,12 @@ void BST::remove(BinaryNode* &t, string item)
 			parent = temp;
 			if (item < (temp->item).getName())
 			{
-				temp = temp->left;	
+				temp = temp->left;
 				Left = true;
 			}
 			else
 			{
-				temp = temp->right;	
+				temp = temp->right;
 				Left = false;
 			}
 		}
@@ -168,6 +177,8 @@ void BST::inorder()
 		
 	else
 	{
+		cout.width(20); cout << "Country" << setw(20) << "Hit Count" << endl;
+		cout.width(20); cout << "=======" << setw(20) << "=========" << endl; 
 		inorder(root);
 	}
 }
@@ -177,7 +188,7 @@ void BST::inorder(BinaryNode* t)
 	if (t != NULL)
 	{
 		inorder(t->left);
-		cout << t->item.getName() << endl;
+		cout.width(20); cout << t->item.getName() << setw(20) << t->item.getHit_count() << endl;
 		inorder(t->right);
 	}
 }
@@ -260,3 +271,26 @@ void BST::searchforHit(BinaryNode* t, string target)
 		}
 	}
 }
+
+// display the most searched country/countries 
+void BST::searchforobj()
+{
+	return searchforobj(root);
+}
+
+void BST::searchforobj(BinaryNode* t)
+{
+	if (t != NULL && t->item.getHit_count() > t->left->item.getHit_count())
+	{
+		cout.width(20); cout << t->item.getName() << setw(20) << t->item.getHit_count() << endl;
+		inorder(t->left);
+	}
+
+	else
+	{
+		inorder(t->left);
+	}
+}
+
+
+
