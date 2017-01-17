@@ -75,8 +75,9 @@ void choice1()
 					throw 0;
 				}
 			}
-			hit_tree.search(target);
-			//tree.search(target);
+			hit_tree.search(tree.searchforobj(target));
+			hit_tree.remove(tree.searchforobj(target));
+			hit_tree.insert1(&(tree.searchforobj(target)));
 		}
 	}
 

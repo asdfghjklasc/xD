@@ -19,8 +19,8 @@ public:
 	void insert1(BinaryNodeHits* &t, itemType2 item);
 
 	// search for an item and reinserts the item into the tree 
-	void search(string target);
-	void search(BinaryNodeHits* t, string target);
+	void search(country target);
+	void search(BinaryNodeHits* t, country target);
 
 	// delete an item
 	void remove(country target);

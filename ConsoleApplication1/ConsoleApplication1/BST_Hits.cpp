@@ -33,12 +33,12 @@ void BST_Hits::insert1(BinaryNodeHits* &t, itemType2 item)
 
 	else
 	{
-		if ((*(t->item)).getHit_count() > (*(item)).getHit_count())  // insert into the left sub-tree
+		if ((*(t->item)).getHit_count() > (*(item)).getHit_count())  // insert into the left sub-tree 
 		{
 			insert1(t->left, item);
 		}
 
-		else  // insert into the right sub-tree
+		else  // insert into the right sub-tre
 		{
 			insert1(t->right, item);
 		}
@@ -46,31 +46,30 @@ void BST_Hits::insert1(BinaryNodeHits* &t, itemType2 item)
 }
 
 // search for an item and reinserts the item into the tree 
-void BST_Hits::search(string target)
+bool BST_Hits::isempty()
+{
+	return (root == NULL);
+}
+void BST_Hits::search(country target)
 {
 	search(root, target);
 }
 
-void BST_Hits::search(BinaryNodeHits* t, string target)
+void BST_Hits::search(BinaryNodeHits* t, country target)
 {
-	if (target == (*t->item).getName())  // if target is found 
+	if (target.getName() == (*t->item).getName())  // if target is found 
 	{
 		cout << (*t->item).getName() << " " << (*t->item).getDescription() << " " << "The price to travel there would be" << " " << "S$" << (*t->item).getPrice() << endl;
 	}
 
-	else if (target > (*t->item).getName())  // search in the right sub-tree 
+	else if (target.getHit_count() > (*t->item).getHit_count())  // search in the right sub-tree 
 	{
 		search(t->right, target);
 	}
 
-	else if (target < (*t->item).getName())  // search in the left sub-tree 
+	else  // search in the left sub-tree 
 	{
 		search(t->left, target);
-	}
-
-	else 
-	{
-		cout << "Error."; 
 	}
 }
 
@@ -239,7 +238,7 @@ void BST_Hits::displayMaxHits(BinaryNodeHits* &t)
 }
 
 // check if the binary search tree is empty
-bool BST_Hits::isempty()
+/*bool BST_Hits::isempty()
 {
 	if (root == NULL)
 	{
@@ -250,5 +249,5 @@ bool BST_Hits::isempty()
 	{
 		return false; 
 	}
-}
+}*/
 
