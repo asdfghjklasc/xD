@@ -33,9 +33,13 @@ public:
 	void inorder(); 
 	void inorder(BinaryNode* t);
 
-	// save data to a file 
+	// save data to a file (.txt)
 	void saveData();
 	void saveData(BinaryNode* t, ofstream& fileName);
+
+	// save data to a file (.xls)
+	void saveExcelData();
+	void saveExcelData(BinaryNode* t, int row);
 
 	// count the number of countries in the world 
 	int countCountry();

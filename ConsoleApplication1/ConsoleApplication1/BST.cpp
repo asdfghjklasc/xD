@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "iostream"
 #include "fstream"  // stream class to both read and write from/to files.
+#include "libxl.h"
+using namespace libxl;
 using namespace std; 
 #include "BinaryNode.h"
 #include "country.h"
@@ -200,7 +202,7 @@ void BST::inorder(BinaryNode* t)
 	}
 }
 
-// save data to a file
+// save data to a file (.txt)
 void BST::saveData()
 {
 	if (isEmpty())
@@ -230,6 +232,50 @@ void BST::saveData(BinaryNode* t, ofstream& fileName)
 	}
 }
 
+// save data to a file (.xls)
+void BST::saveExcelData()
+{
+	if (isEmpty())
+	{
+		cout << "Error: The country respository is empty. " << endl;
+	}
+
+	else
+	{
+		string input;
+		cout << "Enter new Excel file name:" << endl;
+		cin >> input;
+
+		Book* book = xlCreateBook();
+		if (book)
+		{
+			Sheet* sheet = book->addSheet("CountrySheet");
+			saveExcelData(root, 0);
+		}
+
+		if (book->save(input))
+		{
+			cout << "File has been created." << endl;
+		}
+	}
+}
+
+void BST::saveExcelData(BinaryNode* t, int row)
+{
+	if (t != NULL)
+	{
+		//write string value
+		sheet->writeStr(row, 0, t->item.getName());
+		sheet->writeStr(row + 1, 0, t->item.getDescription());
+
+		//write numeric value
+		sheet->writeNum(row + 2, 0, t->item.getPrice());
+		sheet->writeNum(row + 3, 0, t->item.getHit_count());
+
+		saveExcelData(t->left, row + 4);
+		saveExcelData(t->right, row + 8);
+	}
+}
 // count the number of countries in the world 
 int BST::countCountry()
 {

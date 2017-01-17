@@ -158,7 +158,37 @@ void choice7()
 
 		else if (choice == 2)
 		{
+			/*string input;
+			cout << "Enter new Excel file name:" << endl;
+			cin >> input;
+			Book* book = xlCreateBook();
+			if (book)
+			{
+				int row = 0;
+				Sheet* sheet = book->addSheet("CountrySheet");
+				while (BinaryNode* t != NULL);
+				{	
+					if (sheet)
+					{
+						//write string value
+						sheet->writeStr(row, 0, //name);
+						sheet->writeStr(row + 1, 0, //description);
 
+						//write numeric value
+						sheet->writeNum(row + 2, 0, //price);
+						sheet->writeNum(row + 3, 0, //hit_count);
+						row = row + 4;
+					}
+				}
+
+				if (book->save(input))
+				{
+					cout << "\nFile has been created." << endl;
+				}
+				book->release();
+			}*/
+
+			tree.saveExcelData();
 		}
 	}
 }
@@ -228,10 +258,12 @@ void choice8()
 
 						country country(name, description, price, hit_count);
 						tree.insert(country);
-						row = row + 1;
+						row = row + 4;
 					}
 				}
 			}
+
+			book->release();
 		}
 	}*/
 }
