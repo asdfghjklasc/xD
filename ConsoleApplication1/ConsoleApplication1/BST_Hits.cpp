@@ -1,12 +1,12 @@
+// this tree is mainly used to print by the number of hits and used to rearrange the item after each new search for faster access 
 #include "stdafx.h"
 #include <string>
-using namespace std;
+#include <iostream>
 #include <iomanip>
+using namespace std;
 #include "BinaryNodeHits.h"
 #include "BST_Hits.h"
 #include "country.h"
-#include "BinaryNodeHits.h"
-#include <iostream>
 
 // default constructor
 BST_Hits::BST_Hits()
@@ -14,7 +14,7 @@ BST_Hits::BST_Hits()
 	root = NULL; 
 };
 
-// add an item to the binary search tree
+// add an item 
 void BST_Hits::insert1(itemType2 item)
 {
 	return insert1(root, item);
@@ -33,19 +33,48 @@ void BST_Hits::insert1(BinaryNodeHits* &t, itemType2 item)
 
 	else
 	{
-		if ((*(t->item)).getHit_count() > (*(item)).getHit_count())
+		if ((*(t->item)).getHit_count() > (*(item)).getHit_count())  // insert into the left sub-tree
 		{
 			insert1(t->left, item);
 		}
 
-		else
+		else  // insert into the right sub-tree
 		{
 			insert1(t->right, item);
 		}
 	}
 }
 
-// delete an item in the binary search tree
+// search for an item and reinserts the item into the tree 
+void BST_Hits::search(string target)
+{
+	search(root, target);
+}
+
+void BST_Hits::search(BinaryNodeHits* t, string target)
+{
+	if (target == (*t->item).getName())  // if target is found 
+	{
+		cout << (*t->item).getName() << " " << (*t->item).getDescription() << " " << "The price to travel there would be" << " " << "S$" << (*t->item).getPrice() << endl;
+	}
+
+	else if (target > (*t->item).getName())  // search in the right sub-tree 
+	{
+		search(t->right, target);
+	}
+
+	else if (target < (*t->item).getName())  // search in the left sub-tree 
+	{
+		search(t->left, target);
+	}
+
+	else 
+	{
+		cout << "Error."; 
+	}
+}
+
+// delete an item 
 void BST_Hits::remove(country target)
 {
 	{
@@ -146,6 +175,8 @@ void BST_Hits::printinorderofhits()
 	}
 	else
 	{
+		cout << setw(16) << "Country" << setw(16) << "Hit Count" << setw(16) << endl;
+		cout << setw(16) << "-------" << setw(16) << "---------" << setw(16) << endl;
 		printinorderofhits(root);
 	}
 }
@@ -155,7 +186,7 @@ void BST_Hits::printinorderofhits(BinaryNodeHits* t)
 	if (t != NULL)
 	{
 		printinorderofhits(t->right);
-		cout << (*(t->item)).getName() << endl;
+		cout << setw(16) << (*(t->item)).getName() << setw(16) << (*(t->item)).getHit_count() << setw(16) << endl;
 		printinorderofhits(t->left);
 	}
 }
@@ -206,7 +237,6 @@ void BST_Hits::displayMaxHits(BinaryNodeHits* &t)
 		}
 	}
 }
-
 
 // check if the binary search tree is empty
 bool BST_Hits::isempty()

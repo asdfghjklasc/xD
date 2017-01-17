@@ -44,7 +44,8 @@ void BST::insert(BinaryNode* &t, itemType item, BST_Hits &HitsTree)
 		}
 	}
 }
-// search an item in the binary search tree
+
+/*// search an item in the binary search tree
 void BST::search(string item)
 {
 	if (isEmpty())
@@ -75,7 +76,7 @@ void BST::search(BinaryNode* t, string item)
 	{
 		search(t->left, item); 
 	}
-}
+}*/
 
 // delete an item from the binary search tree
 void BST::remove(string item)

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include "libxl.h" 
+using namespace libxl;
 using namespace std; 
 #include "country.h"
 #include "BST.h"
@@ -74,7 +75,8 @@ void choice1()
 					throw 0;
 				}
 			}
-			tree.search(target);
+			hit_tree.search(target);
+			//tree.search(target);
 		}
 	}
 
@@ -131,39 +133,48 @@ void choice6()
 }
 
 // save data to a file
-/*void choice7()
+void choice7()
 {
-	int choice; 
-	cout << "Would you like to save the data to a txt or xlsx file?" << endl;
-	cout << "------------------------------------------------------" << endl;
-	cout << "1. txt file" << endl;
-	cout << "2. xlsx file" << endl << endl; 
-	cout << "Please enter your choice : ";
-
-	if (choice == 1)
+	if (tree.isEmpty())
 	{
-		tree.saveData();
+		cout << "Error : The country respository is empty." << endl;
 	}
 
-	else if (choice == 2)
+	else
 	{
+		int choice = -1;
+		cout << "Would you like to save the data to a txt or xlsx file?" << endl;
+		cout << "------------------------------------------------------" << endl;
+		cout << "1. txt file" << endl;
+		cout << "2. xlsx file" << endl << endl;
+		cout << "Please enter your choice : ";
+		cin >> choice;
 
+		if (choice == 1)
+		{
+			tree.saveData();
+		}
+
+		else if (choice == 2)
+		{
+
+		}
 	}
 }
 
 // load data from a file
 void choice8()
 {
-	int choice;
+	int choice = -1;
 	cout << "Would you like to save the data to a txt or xlsx file?" << endl;
 	cout << "------------------------------------------------------" << endl;
 	cout << "1. txt file" << endl;
 	cout << "2. xlsx file" << endl << endl;
 	cout << "Please enter your choice : ";
+	cin >> choice;
 
 	if (choice == 1)
 	{
-
 		string line;
 		ifstream myfile;
 		string input;
@@ -189,7 +200,7 @@ void choice8()
 		myfile.close();
 	}
 
-	else if (choice == 2)
+	/*else if (choice == 2)
 	{
 		Book* book = xlCreateBook();
 		if (book)
@@ -221,8 +232,8 @@ void choice8()
 				}
 			}
 		}
-	}
-}*/
+	}*/
+}
 
 // add a new country
 void choice9()
@@ -354,7 +365,7 @@ int main()
 			choice6();
 		}
 
-		/*else if (choice == 7)  // Able to add 
+		else if (choice == 7)  // Able to add 
 		{
 			choice7();
 		}
@@ -362,7 +373,7 @@ int main()
 		else if (choice == 8)  // Able to remove item
 		{
 			choice8();
-		}*/
+		}
 
 		else if (choice == 9)  // Able to display items in descending order of hit count
 		{

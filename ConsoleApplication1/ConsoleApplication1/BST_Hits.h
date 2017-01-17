@@ -14,15 +14,15 @@ public:
 	// default constructor
 	BST_Hits();
 
-	// add an item to the binary search tree
+	// add an item 
 	void insert1(itemType2 item);
 	void insert1(BinaryNodeHits* &t, itemType2 item);
 
-	/*// search an item in the binary search tree
-	BinaryNodeHits* search(itemType2 target);
-	BinaryNodeHits* search(BinaryNodeHits* t, itemType2 target);*/
+	// search for an item and reinserts the item into the tree 
+	void search(string target);
+	void search(BinaryNodeHits* t, string target);
 
-	// delete an item in the binary search tree
+	// delete an item
 	void remove(country target);
 	void remove(BinaryNodeHits* &t, country target);
 
