@@ -33,7 +33,10 @@
     <ClInclude Include="country.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HashTable.h">
+    <ClInclude Include="BinaryNodeHits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BST_Hits.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,7 +53,7 @@
     <ClCompile Include="country.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HashTable.cpp">
+    <ClCompile Include="BST_Hits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

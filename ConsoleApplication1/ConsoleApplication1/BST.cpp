@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "iostream"
 #include "fstream"  // stream class to both read and write from/to files.
-#include <iomanip>
 using namespace std; 
 #include "BinaryNode.h"
 #include "country.h"
 #include "BST.h"
+#include "BinaryNodeHits.h"
+#include "BST_Hits.h"
 
 // default constructor 
 BST::BST()  
@@ -14,12 +15,12 @@ BST::BST()
 }
 
 // add an item to the binary search tree
-void BST::insert(itemType item)
+void BST::insert(itemType item, BST_Hits &HitsTree)
 {
-	insert(root, item); 
+	insert(root, item, HitsTree);
 }
 
-void BST::insert(BinaryNode* &t, itemType item)
+void BST::insert(BinaryNode* &t, itemType item, BST_Hits &HitsTree)
 {
 	if (t == NULL)  // check if the tree is empty
 	{
@@ -28,33 +29,40 @@ void BST::insert(BinaryNode* &t, itemType item)
 		newNode->left = NULL;
 		newNode->right = NULL;
 		t = newNode;
+		HitsTree.insert1(&(t->item));
+	}
+	else
+	{
+		if (item.getName() < t->item.getName())  // insert in the right sub-tree 
+		{
+			insert(t->left, item, HitsTree);
+		}
+
+		else                                     // insert in the left sub-tree 
+		{
+			insert(t->right, item, HitsTree);
+		}
+	}
+}
+// search an item in the binary search tree
+void BST::search(string item)
+{
+	if (isEmpty())
+	{
+		cout << "Item is not found. " << endl; 
 	}
 
 	else
 	{
-		if (item.getHit_count() > t->item.getHit_count())  // insert in the left sub-tree 
-		{
-			insert(t->left, item);
-		}
-
-		else  // insert in the right sub-tree 
-		{
-			insert(t->right, item);
-		}
+		search(root, item); 
 	}
-}
-
-// search an item in the binary search tree
-void BST::search(string item)
-{
-	search(root, item); 
 }
 
 void BST::search(BinaryNode* t, string item)
 {
 	if (item == t->item.getName()) 
 	{
-		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << "." << endl; 
+		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << endl; 
 		t->item.setHit_count(t->item.getHit_count() + 1);
 	}
 
@@ -74,12 +82,12 @@ void BST::remove(string item)
 {
 	if (isEmpty())
 	{
-		cout << "Error: The country respository is empty. " << endl;
+		cout << "Error: The country respository is empty. " << endl; 
 	}
-
+	
 	else
 	{
-		remove(root, item);
+		remove(root, item); 
 	}
 }
 
@@ -101,12 +109,12 @@ void BST::remove(BinaryNode* &t, string item)
 			parent = temp;
 			if (item < (temp->item).getName())
 			{
-				temp = temp->left;
+				temp = temp->left;	
 				Left = true;
 			}
 			else
 			{
-				temp = temp->right;
+				temp = temp->right;	
 				Left = false;
 			}
 		}
@@ -116,7 +124,7 @@ void BST::remove(BinaryNode* &t, string item)
 	{
 		if (temp->left == NULL && temp->right == NULL)
 		{
-			if (temp == t)
+			if (temp == t)	
 				t = NULL;
 			else
 				if (Left)
@@ -172,13 +180,11 @@ void BST::inorder()
 {
 	if (isEmpty())
 	{
-		cout << "Error : The country respository is empty. " << endl;
+		cout << "Error: The country respository is empty. " << endl;
 	}
 		
 	else
 	{
-		cout.width(20); cout << "Country" << setw(20) << "Hit Count" << endl;
-		cout.width(20); cout << "=======" << setw(20) << "=========" << endl; 
 		inorder(root);
 	}
 }
@@ -188,7 +194,7 @@ void BST::inorder(BinaryNode* t)
 	if (t != NULL)
 	{
 		inorder(t->left);
-		cout.width(20); cout << t->item.getName() << setw(20) << t->item.getHit_count() << endl;
+		cout << t->item.getName() << endl;
 		inorder(t->right);
 	}
 }
@@ -242,55 +248,33 @@ int BST::countCountry(BinaryNode* t)
 }
 
 // display the number of hits of an item
-void BST::searchforHit(string target)
+ItemType BST::searchforobj(string target)
 {
-	return searchforHit(root, target);
+	return searchforobj(root, target);
 }
 
-void BST::searchforHit(BinaryNode* t, string target)
+ItemType BST::searchforobj(BinaryNode* t, string target)
 {
 	if (t == NULL)
 	{
-		cout << "Error : Country not found." << endl;
+		cout << "item not found" << endl;
 	}
+
 	else
 	{
 		if ((t->item).getName() == target)
 		{
-			cout << "The number of search hits is " << t->item.getHit_count() << ".";
+			return t->item;
 		}
 
 		else if (target > (t->item).getName())
 		{
-			searchforHit(t->right, target);
+			return searchforobj(t->right, target);
 		}
 
 		else
 		{
-			searchforHit(t->left, target);
+			return searchforobj(t->left, target);
 		}
 	}
 }
-
-// display the most searched country/countries 
-void BST::searchforobj()
-{
-	return searchforobj(root);
-}
-
-void BST::searchforobj(BinaryNode* t)
-{
-	if (t != NULL && t->item.getHit_count() > t->left->item.getHit_count())
-	{
-		cout.width(20); cout << t->item.getName() << setw(20) << t->item.getHit_count() << endl;
-		inorder(t->left);
-	}
-
-	else
-	{
-		inorder(t->left);
-	}
-}
-
-
-

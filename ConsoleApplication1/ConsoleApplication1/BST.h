@@ -2,6 +2,7 @@
 #include <string>
 #include "BinaryNode.h"
 #include "country.h"
+#include "BST_Hits.h" 
 typedef country itemType;
 
 class BST
@@ -14,8 +15,8 @@ public:
 	BST();  
 
 	// add an item to the binary search tree
-	void insert(itemType item); 
-	void insert(BinaryNode* &t, itemType item); 
+	void insert(itemType item, BST_Hits &tree);
+	void insert(BinaryNode* &t, itemType item, BST_Hits &tree);
 
 	// search an item in the binary search tree
 	void search(string item);
@@ -41,12 +42,8 @@ public:
 	int countCountry(BinaryNode* t);
 
 	// display the number of hits of an item
-	void searchforHit(string target);
-	void searchforHit(BinaryNode* t, string target);
-
-	// display the most searched country/countries 
-	void searchforobj();
-	void searchforobj(BinaryNode* t);
+	ItemType searchforobj(string target);
+	ItemType searchforobj(BinaryNode* t, string target);
 };
 
 

@@ -3,17 +3,15 @@
 #include "fstream"  // stream class to both read and write from/to files.
 #include <sstream>
 #include <string>
+#include "libxl.h" 
 using namespace std; 
 #include "country.h"
 #include "BST.h"
 #include "BinaryNode.h"
-#include "HashTable.h" 
-#include "libxl.h"
-using namespace libxl;
-#include <conio.h>
-
+#include "BST_Hits.h"
+#include "BinaryNodeHits.h"
 BST tree;
-HashTable hashtable; 
+BST_Hits hit_tree; 
 
 // Miscellaneous features 
 // 1. to print the menu of the application 
@@ -35,25 +33,24 @@ HashTable hashtable;
 // 5. Graphical User Interface
 // 6. User validation
 
-void displayMenu() 
+void displayMenu()
 {
 	cout << "MENU" << endl;
-	cout << "=======================================================" << endl;
+	cout << "------------------------------------------------------" << endl;
 	cout << " 1. Search for an item" << endl;
 	cout << " 2. Display the items in ascending order (of name)" << endl;
 	cout << " 3. Display items in descending order of hit count" << endl;
-	cout << " 4. Display the number of hits of an country." << endl; 
-	cout << " 5. Display the most searched country." << endl;  // incomplete
-	cout << " 6. Display the total number of countries in the world" << endl; 
+	cout << " 4. Display the number of hits of an country." << endl;
+	cout << " 5. Display the most searched country." << endl;
+	cout << " 6. Display the total number of countries in the world" << endl;
 	cout << " 7. Save data to a file" << endl;
 	cout << " 8. Load data from a file" << endl;
 	cout << " 9. Add a new country" << endl;
-	cout << "10. Remove an existing country" << endl;
-	cout << "11. Load data from an Excel file" << endl;
+	cout << "10. Remove an existing country" << endl << endl;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // search for an item
-void choice1()  
+void choice1()
 {
 	try
 	{
@@ -64,12 +61,12 @@ void choice1()
 
 		else
 		{
-			char c; 
+			char c;
 			string target;
 			cout << "Enter the name of the country: ";
 			cin >> target;
 
-			for (int i = 0; i < target.length(); i++)  
+			for (int i = 0; i < target.length(); i++)
 			{
 				c = target.at(i);
 				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
@@ -77,80 +74,36 @@ void choice1()
 					throw 0;
 				}
 			}
-
 			tree.search(target);
 		}
 	}
 
-	catch(...)
+	catch (...)
 	{
 		cout << "Invalid input" << endl;
 	}
 }
-	
-// display the items in ascending order (of name)
-void choice2()  
-{
-	if (tree.isEmpty())
-	{
-		cout << "Error : The country respository is empty." << endl;
-	}
 
-	else
-	{
-		int arraySize = tree.countCountry();
-		hashtable.sortAndPrintByName(arraySize);
-	}
+// display the items in ascending order (of name)
+void choice2()
+{
+	tree.inorder();
 }
 
 // display items in descending order of hit count
-void choice3()  
+void choice3()
 {
-	tree.inorder(); 
+	hit_tree.printinorderofhits();
 }
 
-// display the number of hits of an country
-void choice4() 
+// display the number of hits of an country (Ryan) 
+void choice4()
 {
-	if (tree.isEmpty())
-	{
-		cout << "Error : The country respository is empty." << endl;
-	}
-
-	else
-	{
-		try
-		{
-			string input;
-			cout << "Enter the name of the country : ";
-			cin >> input;
-			char c;  // for the try-catch 
-			for (int i = 0; i < input.length(); i++)
-			{
-				c = input.at(i);
-				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
-				{
-					throw 0;
-				}
-			}
-			tree.searchforHit(input);
-		}
-
-		catch (...)
-		{
-			cout << "Error : Invalid input entered." << endl;
-		}
-	}
+	
 }
 
 // display the most searched country
-void choice5()  
-{
-	tree.searchforobj(); 
-}
-
-// display the total number of countries in the world
-void choice6()  
+void choice5()
 {
 	if (tree.isEmpty())
 	{
@@ -159,94 +112,120 @@ void choice6()
 
 	else
 	{
-		cout << "There are" << " " << tree.countCountry() << " " << "countries in the world today." << endl;
+		hit_tree.displayMaxHits();
+	}
+}
+
+// display the total number of countries in the world
+void choice6()
+{
+	if (tree.isEmpty())
+	{
+		cout << "Error : The country respository is empty." << endl;
+	}
+
+	else
+	{
+		cout << tree.countCountry() << endl;
 	}
 }
 
 // save data to a file
-void choice7() 
+void choice7()
 {
-	int option;
-	tree.saveData();
+	int choice; 
+	cout << "Would you like to save the data to a txt or xlsx file?" << endl;
+	cout << "------------------------------------------------------" << endl;
+	cout << "1. txt file" << endl;
+	cout << "2. xlsx file" << endl << endl; 
+	cout << "Please enter your choice : ";
+
+	if (choice == 1)
+	{
+		tree.saveData();
+	}
+
+	else if (choice == 2)
+	{
+
+	}
 }
 
 // load data from a file
 void choice8()
 {
 	int choice;
-	cout << "1. Load .txt file" << endl;
-	cout << "2. Load .xls file" << endl;
+	cout << "Would you like to save the data to a txt or xlsx file?" << endl;
+	cout << "------------------------------------------------------" << endl;
+	cout << "1. txt file" << endl;
+	cout << "2. xlsx file" << endl << endl;
 	cout << "Please enter your choice : ";
-	cin >> choice;
 
-	while (choice >= 1 && choice <= 2)
+	if (choice == 1)
 	{
-		// load data from .txt
-		if (choice == 1)
+
+		string line;
+		ifstream myfile;
+		string input;
+		cout << "Enter the file name : ";
+		cin >> input;
+		myfile.open(input);
+		cout << "Progress...." << endl;
+		while (getline(myfile, line))
 		{
-			string line;
-			ifstream myfile;
-			string input;
-			cout << "Enter the file name : ";
-			cin >> input;
-			myfile.open(input);
-			while (getline(myfile, line))
-			{
-				stringstream linestream(line);
-				string name;
-				string description;
-				string price;
-				string hit_count;
-				getline(linestream, name, ';');
-				getline(linestream, description, ';');
-				getline(linestream, price, ';');
-				getline(linestream, hit_count, ';');
-				country country(name, description, stof(price), atoi(hit_count.c_str()));
-				tree.insert(country);
-				hashtable.addItem(country);
-			}
-			myfile.close();
+			stringstream linestream(line);
+			string name;
+			string description;
+			string price;
+			string hit_count;
+			getline(linestream, name, ';');
+			getline(linestream, description, ';');
+			getline(linestream, price, ';');
+			getline(linestream, hit_count, ';');
+			country country(name, description, stof(price), atoi(hit_count.c_str()));
+			tree.insert(country, hit_tree);
+			cout << "Item successfully loaded." << endl;
 		}
+		myfile.close();
+	}
 
-		// load data from .xls
-		else if (choice == 2)
+	/*else if (choice == 2)
+	{
+		Book* book = xlCreateBook();
+		if (book)
 		{
-			Book* book = xlCreateBook();
-			if (book)
+			int row = 0;
+			string name;
+			string description;
+			double price;
+			int hit_count;
+			if (book->load(L"example.xls"))
 			{
-				int row = 0;
-				string name;
-				string description;
-				double price;
-				int hit_count;
-				if (book->load(L"example.xls"))
+				Sheet* sheet = book->getSheet(0);
+				while (price != NULL)
 				{
-					Sheet* sheet = book->getSheet(0);
-					while (price != NULL)
+					if (sheet)
 					{
-						if (sheet)
-						{
-							//read string value
-							name = sheet->readStr(row, 0);
-							description = sheet->readStr(row + 1, 0);
+						//read string value
+						name = sheet->readStr(row, 0);
+						description = sheet->readStr(row + 1, 0);
 
-							//read numeric value
-							price = sheet->readNum(row + 2, 0);
-							hit_count = sheet->readNum(row + 3, 0);
+						//read numeric value
+						price = sheet->readNum(row + 2, 0);
+						hit_count = sheet->readNum(row + 3, 0);
 
-							country country(name, description, price, hit_count);
-							tree.insert(country);
-							row = row + 1;
-						}
+						country country(name, description, price, hit_count);
+						tree.insert(country);
+						row = row + 1;
 					}
 				}
 			}
 		}
-	}
+	}*/
 }
 
 // add a new country
-void choice9()  
+void choice9()
 {
 	try
 	{
@@ -283,8 +262,8 @@ void choice9()
 		}
 
 		country country(name, description, stof(price), hit_count);
-		tree.insert(country);
-		hashtable.addItem(country);
+		tree.insert(country, hit_tree);
+		
 	}
 
 	catch (...)
@@ -294,7 +273,7 @@ void choice9()
 }
 
 // remove an existing country
-void choice10()  
+void choice10()
 {
 	if (tree.isEmpty())
 	{
@@ -318,9 +297,8 @@ void choice10()
 					throw 0;
 				}
 			}
-
 			tree.remove(item);
-			hashtable.removeItem(item); 
+			//hit_tree.remove(item);
 		}
 
 		catch (...)
@@ -330,99 +308,79 @@ void choice10()
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // main program 
 int main()
 {
-	try 
+	cout << "Please load a file containing the list of countries" << endl; 
+	int choice; 
+	displayMenu();
+	cout << "Please enter your choice : ";
+	cin >> choice; 
+	
+	while (choice >= 1 && choice <= 10)
 	{
-		cout << "**Please load a file containing the list of countries**" << endl;
-		int choice;
+		// search for an item 
+		if (choice == 1)  
+		{
+			choice1(); 
+		}
+
+		// display the items in ascending order (of name) 
+		else if (choice == 2)  
+		{
+			choice2();
+		}
+
+		// display the number of hits of an item.
+		else if (choice == 3)
+		{
+			choice3();
+		}
+
+		// count the number of countries in the world 
+		else if (choice == 4)
+		{
+			choice4();
+		}
+
+		else if (choice == 5)  // save data to a file  
+		{
+			choice5();
+		}
+
+		else if (choice == 6)  // load data from a file 
+		{
+			choice6();
+		}
+
+		else if (choice == 7)  // Able to add 
+		{
+			choice7();
+		}
+
+		else if (choice == 8)  // Able to remove item
+		{
+			choice8();
+		}
+
+		else if (choice == 9)  // Able to display items in descending order of hit count
+		{
+			choice9();
+		}
+
+		else if (choice == 10)
+		{
+			choice10();
+		}
+
+		cout << endl << endl << endl << endl;
 		displayMenu();
 		cout << "Please enter your choice : ";
 		cin >> choice;
-
-		while (choice >= 1 && choice <= 10)
-		{
-			// search for an item
-			if (choice == 1)
-			{
-				choice1();
-			}
-
-		    // display the items in ascending order (of name)
-			else if (choice == 2)
-			{
-				choice2();
-			}
-
-			// display items in descending order of hit count
-			else if (choice == 3)
-			{
-				choice3();
-			}
-
-			// display the number of hits of an country
-			else if (choice == 4)
-			{
-				choice4();
-			}
-
-			// display the most searched country
-			else if (choice == 5)  
-			{
-				choice5();
-			}
-
-			// display the total number of countries in the world
-			else if (choice == 6)  
-			{
-				choice6();
-			}
-
-			// save data to a file
-			else if (choice == 7)  
-			{
-				choice7();
-			}
-
-			// load data from a file"
-			else if (choice == 8)  
-			{
-				choice8();
-			}
-
-			// add a new country
-			else if (choice == 9)  
-			{
-				choice9();
-			}
-
-			// remove an existing country
-			else if (choice == 10)
-			{
-				choice10(); 
-			}
-
-			/*// load data from excel (.xls)
-			else if (choice == 11)
-			{
-				choice11();
-			}*/
-
-			cout << endl << endl << endl << endl;
-			displayMenu();
-			cout << "Please enter your choice : ";
-			cin >> choice;
-		}
-		throw 0; 
 	}
-
-	catch(int e)
-	{
-		cout << "Error : Invalid option entered. The program has been terminated." << endl;
-	}
-	system("pause");
+	cout << "Invalid input entered. Program terminated." << endl; 
+	system("pause"); 
 }
 
 
