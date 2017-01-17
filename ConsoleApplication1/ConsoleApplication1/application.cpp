@@ -131,7 +131,7 @@ void choice6()
 }
 
 // save data to a file
-void choice7()
+/*void choice7()
 {
 	int choice; 
 	cout << "Would you like to save the data to a txt or xlsx file?" << endl;
@@ -189,7 +189,7 @@ void choice8()
 		myfile.close();
 	}
 
-	/*else if (choice == 2)
+	else if (choice == 2)
 	{
 		Book* book = xlCreateBook();
 		if (book)
@@ -221,8 +221,8 @@ void choice8()
 				}
 			}
 		}
-	}*/
-}
+	}
+}*/
 
 // add a new country
 void choice9()
@@ -354,7 +354,7 @@ int main()
 			choice6();
 		}
 
-		else if (choice == 7)  // Able to add 
+		/*else if (choice == 7)  // Able to add 
 		{
 			choice7();
 		}
@@ -362,7 +362,7 @@ int main()
 		else if (choice == 8)  // Able to remove item
 		{
 			choice8();
-		}
+		}*/
 
 		else if (choice == 9)  // Able to display items in descending order of hit count
 		{
