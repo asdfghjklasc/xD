@@ -46,10 +46,6 @@ void BST_Hits::insert1(BinaryNodeHits* &t, itemType2 item)
 }
 
 // search for an item and reinserts the item into the tree 
-bool BST_Hits::isempty()
-{
-	return (root == NULL);
-}
 void BST_Hits::search(country target)
 {
 	search(root, target);
@@ -59,17 +55,22 @@ void BST_Hits::search(BinaryNodeHits* t, country target)
 {
 	if (target.getName() == (*t->item).getName())  // if target is found 
 	{
-		cout << (*t->item).getName() << " " << (*t->item).getDescription() << " " << "The price to travel there would be" << " " << "S$" << (*t->item).getPrice() << endl;
+		cout << (*t->item).getName() << " " << (*t->item).getDescription() << " " << "The price to travel there would be" << " " << "S$" << (*t->item).getPrice() << "." << endl;
 	}
 
-	else if (target.getHit_count() > (*t->item).getHit_count())  // search in the right sub-tree 
+	else if (target.getHit_count() >= (*t->item).getHit_count())  // search in the right sub-tree 
 	{
 		search(t->right, target);
 	}
 
-	else  // search in the left sub-tree 
+	else if (target.getHit_count() < (*t->item).getHit_count())   // search in the left sub-tree 
 	{
 		search(t->left, target);
+	}
+
+	else 
+	{
+		cout << "Error : No such country found." << endl; 
 	}
 }
 
@@ -238,7 +239,7 @@ void BST_Hits::displayMaxHits(BinaryNodeHits* &t)
 }
 
 // check if the binary search tree is empty
-/*bool BST_Hits::isempty()
+bool BST_Hits::isempty()
 {
 	if (root == NULL)
 	{
@@ -249,5 +250,5 @@ void BST_Hits::displayMaxHits(BinaryNodeHits* &t)
 	{
 		return false; 
 	}
-}*/
+}
 

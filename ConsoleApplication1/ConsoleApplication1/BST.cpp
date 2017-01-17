@@ -1,3 +1,4 @@
+// this tree is mainly used for storing the class objects and used for primarily for (display the items in ascending order (of name))
 #include "stdafx.h"
 #include "iostream"
 #include "fstream"  // stream class to both read and write from/to files.
@@ -46,39 +47,6 @@ void BST::insert(BinaryNode* &t, itemType item, BST_Hits &HitsTree)
 		}
 	}
 }
-
-/*// search an item in the binary search tree
-void BST::search(string item)
-{
-	if (isEmpty())
-	{
-		cout << "Item is not found. " << endl; 
-	}
-
-	else
-	{
-		search(root, item); 
-	}
-}
-
-void BST::search(BinaryNode* t, string item)
-{
-	if (item == t->item.getName()) 
-	{
-		cout << t->item.getName() << " " << t->item.getDescription() << " " << "The price to travel there would be" << " " << "S$" << t->item.getPrice() << endl; 
-		t->item.setHit_count(t->item.getHit_count() + 1);
-	}
-
-	else if (item > t->item.getName())  // search for the target in the right sub-tree 
-	{
-		search(t->right, item);
-	}
-
-	else if (item < t->item.getName())  // search for the target in the left sub-tree 
-	{
-		search(t->left, item); 
-	}
-}*/
 
 // delete an item from the binary search tree
 void BST::remove(string item)
@@ -233,7 +201,7 @@ void BST::saveData(BinaryNode* t, ofstream& fileName)
 }
 
 // save data to a file (.xls)
-void BST::saveExcelData()
+/*void BST::saveExcelData()
 {
 	if (isEmpty())
 	{
@@ -275,7 +243,8 @@ void BST::saveExcelData(BinaryNode* t, int row)
 		saveExcelData(t->left, row + 4);
 		saveExcelData(t->right, row + 8);
 	}
-}
+}*/
+
 // count the number of countries in the world 
 int BST::countCountry()
 {
@@ -295,16 +264,17 @@ int BST::countCountry(BinaryNode* t)
 }
 
 // display the number of hits of an item
-ItemType BST::searchforobj(string target)
+ItemType BST::displayHits(string target)
 {
-	return searchforobj(root, target);
+	return displayHits(root, target);
 }
 
-ItemType BST::searchforobj(BinaryNode* t, string target)
+ItemType BST::displayHits(BinaryNode* t, string target)
 {
 	if (t == NULL)
 	{
-		cout << "item not found" << endl;
+		cout << "Error : Country not found. " << endl; 
+		throw exception();
 	}
 
 	else
@@ -316,12 +286,12 @@ ItemType BST::searchforobj(BinaryNode* t, string target)
 
 		else if (target > (t->item).getName())
 		{
-			return searchforobj(t->right, target);
+			return displayHits(t->right, target);
 		}
 
 		else
 		{
-			return searchforobj(t->left, target);
+			return displayHits(t->left, target);
 		}
 	}
 }

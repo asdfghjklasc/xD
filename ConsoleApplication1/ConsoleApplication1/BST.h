@@ -18,10 +18,6 @@ public:
 	void insert(itemType item, BST_Hits &tree);
 	void insert(BinaryNode* &t, itemType item, BST_Hits &tree);
 
-	// search an item in the binary search tree
-	void search(string item);
-	void search(BinaryNode* t, string item); 
-
 	// delete an item in the binary search tree 
 	void remove(string item);
 	void remove(BinaryNode* &t, string item);
@@ -46,8 +42,8 @@ public:
 	int countCountry(BinaryNode* t);
 
 	// display the number of hits of an item
-	ItemType searchforobj(string target);
-	ItemType searchforobj(BinaryNode* t, string target);
+	ItemType displayHits(string target);
+	ItemType displayHits(BinaryNode* t, string target);
 };
 
 

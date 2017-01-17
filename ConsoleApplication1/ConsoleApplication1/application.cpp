@@ -75,9 +75,11 @@ void choice1()
 					throw 0;
 				}
 			}
-			hit_tree.search(tree.searchforobj(target));
-			hit_tree.remove(tree.searchforobj(target));
-			hit_tree.insert1(&(tree.searchforobj(target)));
+			hit_tree.search(tree.displayHits(target));
+			country country(tree.displayHits(target).getName(), tree.displayHits(target).getDescription(), tree.displayHits(target).getPrice(), tree.displayHits(target).getHit_count() + 1);
+			hit_tree.remove(tree.displayHits(target)); 
+			tree.remove(target);
+			tree.insert(country, hit_tree);
 		}
 	}
 
@@ -99,10 +101,21 @@ void choice3()
 	hit_tree.printinorderofhits();
 }
 
-// display the number of hits of an country (Ryan) 
+// display the number of hits of an country (Ryan)
 void choice4()
 {
-	
+	if (tree.isEmpty())
+	{
+		cout << "Error : The country respository is empty." << endl;
+	}
+
+	else
+	{
+		string target;
+		cout << "Enter the name of the country: ";
+		cin >> target;
+		tree.displayHits(target);
+	}
 }
 
 // display the most searched country
@@ -129,7 +142,7 @@ void choice6()
 
 	else
 	{
-		cout << tree.countCountry() << endl;
+		cout << "There are" << " " << tree.countCountry() << " " << "countries in the world today." << endl;
 	}
 }
 
@@ -188,7 +201,7 @@ void choice7()
 				book->release();
 			}*/
 
-			tree.saveExcelData();
+			//tree.saveExcelData();
 		}
 	}
 }
@@ -197,8 +210,8 @@ void choice7()
 void choice8()
 {
 	int choice = -1;
-	cout << "Would you like to save the data to a txt or xlsx file?" << endl;
-	cout << "------------------------------------------------------" << endl;
+	cout << "Would you like to load the data from a txt or xlsx file?" << endl;
+	cout << "--------------------------------------------------------" << endl;
 	cout << "1. txt file" << endl;
 	cout << "2. xlsx file" << endl << endl;
 	cout << "Please enter your choice : ";
