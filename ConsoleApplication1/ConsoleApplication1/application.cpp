@@ -70,7 +70,7 @@ void choice1()
 			for (int i = 0; i < target.length(); i++)
 			{
 				c = target.at(i);
-				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
+				if (!(isalpha(c)|| c == '_'))
 				{
 					throw 0;
 				}
@@ -297,7 +297,7 @@ void choice9()
 		for (int i = 0; i < name.length(); i++)
 		{
 			c = name.at(i);
-			if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z'))
+			if (!(isalpha(c) && c <= 'Z'))
 			{
 				throw 0;
 			}
@@ -312,7 +312,7 @@ void choice9()
 		for (int i = 0; i < price.length(); i++)
 		{
 			c1 = price.at(i);
-			if (!(c1 >= '1' &&  c1 <= '9'))
+			if (!(isdigit(c1)))
 			{
 				throw 0;
 			}
@@ -320,7 +320,6 @@ void choice9()
 
 		country country(name, description, stof(price), hit_count);
 		tree.insert(country, hit_tree);
-		
 	}
 
 	catch (...)
@@ -349,7 +348,7 @@ void choice10()
 			for (int i = 0; i < item.length(); i++)
 			{
 				c = item.at(i);
-				if (!(c >= 'a' &&  c <= 'z' || c >= 'A' && c <= 'Z' || c == '_'))
+				if (!(isalpha(c) || c == '_'))
 				{
 					throw 0;
 				}
