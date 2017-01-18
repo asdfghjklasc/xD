@@ -244,15 +244,15 @@ void choice8()
 		myfile.close();
 	}
 
-	/*else if (choice == 2)
+	else if (choice == 2)
 	{
 		Book* book = xlCreateBook();
 		if (book)
 		{
 			int row = 0;
-			string name;
-			string description;
-			double price;
+			const wchar_t* name;
+			const wchar_t* description;
+			double price = 0;
 			int hit_count;
 			if (book->load(L"example.xls"))
 			{
@@ -269,8 +269,12 @@ void choice8()
 						price = sheet->readNum(row + 2, 0);
 						hit_count = sheet->readNum(row + 3, 0);
 
-						country country(name, description, price, hit_count);
-						tree.insert(country);
+						wstring ws(name);
+						string str(ws.begin(), ws.end());
+						wstring ns(description);
+						string atr(ns.begin(), ns.end());
+						country country(str, atr, price, hit_count);
+						tree.insert(country, hit_tree);
 						row = row + 4;
 					}
 				}
@@ -278,7 +282,7 @@ void choice8()
 
 			book->release();
 		}
-	}*/
+	}
 }
 
 // add a new country
